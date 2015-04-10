@@ -1,0 +1,609 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		162C344C1AD475330083246F /* OSMTileOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 162C34491AD475330083246F /* OSMTileOverlay.m */; };
+		162C344F1AD4777B0083246F /* CustomOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 162C344E1AD4777B0083246F /* CustomOverlayView.m */; };
+		163191C71AD3B67D00000D87 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 163191C61AD3B67D00000D87 /* CoreLocation.framework */; };
+		163863701AD15BEB00EF2AF5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1638636F1AD15BEB00EF2AF5 /* main.m */; };
+		163863731AD15BEB00EF2AF5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 163863721AD15BEB00EF2AF5 /* AppDelegate.m */; };
+		163863761AD15BEB00EF2AF5 /* iLoGaVE.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 163863741AD15BEB00EF2AF5 /* iLoGaVE.xcdatamodeld */; };
+		163863791AD15BEB00EF2AF5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 163863781AD15BEB00EF2AF5 /* ViewController.m */; };
+		1638637E1AD15BEB00EF2AF5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1638637D1AD15BEB00EF2AF5 /* Images.xcassets */; };
+		163863811AD15BEB00EF2AF5 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1638637F1AD15BEB00EF2AF5 /* LaunchScreen.xib */; };
+		1638638D1AD15BEB00EF2AF5 /* iLoGaVETests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1638638C1AD15BEB00EF2AF5 /* iLoGaVETests.m */; };
+		163863AD1AD15C9100EF2AF5 /* FrontViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 163863981AD15C9100EF2AF5 /* FrontViewController.m */; };
+		163863AE1AD15C9100EF2AF5 /* FrontViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 163863991AD15C9100EF2AF5 /* FrontViewController.xib */; };
+		163863AF1AD15C9100EF2AF5 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1638639B1AD15C9100EF2AF5 /* LoginViewController.m */; };
+		163863B01AD15C9100EF2AF5 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1638639C1AD15C9100EF2AF5 /* LoginViewController.xib */; };
+		163863B11AD15C9100EF2AF5 /* MainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1638639D1AD15C9100EF2AF5 /* MainView.xib */; };
+		163863B21AD15C9100EF2AF5 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 163863A01AD15C9100EF2AF5 /* MapViewController.m */; };
+		163863B31AD15C9100EF2AF5 /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 163863A11AD15C9100EF2AF5 /* MapViewController.xib */; };
+		163863B41AD15C9100EF2AF5 /* MessagesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 163863A31AD15C9100EF2AF5 /* MessagesController.m */; };
+		163863B51AD15C9100EF2AF5 /* MessagesController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 163863A41AD15C9100EF2AF5 /* MessagesController.xib */; };
+		163863B61AD15C9100EF2AF5 /* RearViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 163863A71AD15C9100EF2AF5 /* RearViewController.m */; };
+		163863B71AD15C9100EF2AF5 /* RearViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 163863A81AD15C9100EF2AF5 /* RearViewController.xib */; };
+		163863B81AD15C9100EF2AF5 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 163863AC1AD15C9100EF2AF5 /* SWRevealViewController.m */; };
+		163863BA1AD15D1900EF2AF5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 163863B91AD15D1900EF2AF5 /* MapKit.framework */; };
+		163863BD1AD15DC600EF2AF5 /* reveal-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 163863BB1AD15DC600EF2AF5 /* reveal-icon.png */; };
+		163863BE1AD15DC600EF2AF5 /* reveal-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 163863BC1AD15DC600EF2AF5 /* reveal-icon@2x.png */; };
+		16724C9C1AD450FE006C326C /* TileOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 16724C991AD450FE006C326C /* TileOverlay.m */; };
+		16724C9D1AD450FE006C326C /* TileOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16724C9B1AD450FE006C326C /* TileOverlayView.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		163863871AD15BEB00EF2AF5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 163863621AD15BEB00EF2AF5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 163863691AD15BEB00EF2AF5;
+			remoteInfo = iLoGaVE;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		162C34481AD475330083246F /* OSMTileOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSMTileOverlay.h; sourceTree = "<group>"; };
+		162C34491AD475330083246F /* OSMTileOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSMTileOverlay.m; sourceTree = "<group>"; };
+		162C344A1AD475330083246F /* TileOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TileOverlay.h; sourceTree = "<group>"; };
+		162C344D1AD4777B0083246F /* CustomOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomOverlayView.h; sourceTree = "<group>"; };
+		162C344E1AD4777B0083246F /* CustomOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomOverlayView.m; sourceTree = "<group>"; };
+		163191C61AD3B67D00000D87 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		1638636A1AD15BEB00EF2AF5 /* iLoGaVE.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iLoGaVE.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1638636E1AD15BEB00EF2AF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1638636F1AD15BEB00EF2AF5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		163863711AD15BEB00EF2AF5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		163863721AD15BEB00EF2AF5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		163863751AD15BEB00EF2AF5 /* iLoGaVE.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = iLoGaVE.xcdatamodel; sourceTree = "<group>"; };
+		163863771AD15BEB00EF2AF5 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		163863781AD15BEB00EF2AF5 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		1638637D1AD15BEB00EF2AF5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		163863801AD15BEB00EF2AF5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		163863861AD15BEB00EF2AF5 /* iLoGaVETests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iLoGaVETests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1638638B1AD15BEB00EF2AF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1638638C1AD15BEB00EF2AF5 /* iLoGaVETests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iLoGaVETests.m; sourceTree = "<group>"; };
+		163863971AD15C9100EF2AF5 /* FrontViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrontViewController.h; sourceTree = "<group>"; };
+		163863981AD15C9100EF2AF5 /* FrontViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FrontViewController.m; sourceTree = "<group>"; };
+		163863991AD15C9100EF2AF5 /* FrontViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FrontViewController.xib; sourceTree = "<group>"; };
+		1638639A1AD15C9100EF2AF5 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = SOURCE_ROOT; };
+		1638639B1AD15C9100EF2AF5 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = SOURCE_ROOT; };
+		1638639C1AD15C9100EF2AF5 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = SOURCE_ROOT; };
+		1638639D1AD15C9100EF2AF5 /* MainView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainView.xib; sourceTree = SOURCE_ROOT; };
+		1638639F1AD15C9100EF2AF5 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		163863A01AD15C9100EF2AF5 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		163863A11AD15C9100EF2AF5 /* MapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
+		163863A21AD15C9100EF2AF5 /* MessagesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesController.h; sourceTree = SOURCE_ROOT; };
+		163863A31AD15C9100EF2AF5 /* MessagesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesController.m; sourceTree = SOURCE_ROOT; };
+		163863A41AD15C9100EF2AF5 /* MessagesController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessagesController.xib; sourceTree = SOURCE_ROOT; };
+		163863A61AD15C9100EF2AF5 /* RearViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RearViewController.h; sourceTree = "<group>"; };
+		163863A71AD15C9100EF2AF5 /* RearViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RearViewController.m; sourceTree = "<group>"; };
+		163863A81AD15C9100EF2AF5 /* RearViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RearViewController.xib; sourceTree = "<group>"; };
+		163863AB1AD15C9100EF2AF5 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
+		163863AC1AD15C9100EF2AF5 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
+		163863B91AD15D1900EF2AF5 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		163863BB1AD15DC600EF2AF5 /* reveal-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reveal-icon.png"; sourceTree = "<group>"; };
+		163863BC1AD15DC600EF2AF5 /* reveal-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reveal-icon@2x.png"; sourceTree = "<group>"; };
+		16724C981AD450FE006C326C /* TileOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TileOverlay.h; sourceTree = "<group>"; };
+		16724C991AD450FE006C326C /* TileOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TileOverlay.m; sourceTree = "<group>"; };
+		16724C9A1AD450FE006C326C /* TileOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TileOverlayView.h; sourceTree = "<group>"; };
+		16724C9B1AD450FE006C326C /* TileOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TileOverlayView.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		163863671AD15BEB00EF2AF5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				163191C71AD3B67D00000D87 /* CoreLocation.framework in Frameworks */,
+				163863BA1AD15D1900EF2AF5 /* MapKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		163863831AD15BEB00EF2AF5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		162C34451AD475330083246F /* Not Native Classes */ = {
+			isa = PBXGroup;
+			children = (
+				162C344D1AD4777B0083246F /* CustomOverlayView.h */,
+				162C344E1AD4777B0083246F /* CustomOverlayView.m */,
+				162C34481AD475330083246F /* OSMTileOverlay.h */,
+				162C34491AD475330083246F /* OSMTileOverlay.m */,
+				162C344A1AD475330083246F /* TileOverlay.h */,
+			);
+			path = "Not Native Classes";
+			sourceTree = "<group>";
+		};
+		163863611AD15BEB00EF2AF5 = {
+			isa = PBXGroup;
+			children = (
+				162C34451AD475330083246F /* Not Native Classes */,
+				16724C971AD450FE006C326C /* OSM */,
+				163191C61AD3B67D00000D87 /* CoreLocation.framework */,
+				163863B91AD15D1900EF2AF5 /* MapKit.framework */,
+				1638636C1AD15BEB00EF2AF5 /* iLoGaVE */,
+				163863891AD15BEB00EF2AF5 /* iLoGaVETests */,
+				1638636B1AD15BEB00EF2AF5 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1638636B1AD15BEB00EF2AF5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1638636A1AD15BEB00EF2AF5 /* iLoGaVE.app */,
+				163863861AD15BEB00EF2AF5 /* iLoGaVETests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1638636C1AD15BEB00EF2AF5 /* iLoGaVE */ = {
+			isa = PBXGroup;
+			children = (
+				163863961AD15C9100EF2AF5 /* FrontView */,
+				1638639A1AD15C9100EF2AF5 /* LoginViewController.h */,
+				1638639B1AD15C9100EF2AF5 /* LoginViewController.m */,
+				1638639C1AD15C9100EF2AF5 /* LoginViewController.xib */,
+				1638639D1AD15C9100EF2AF5 /* MainView.xib */,
+				1638639E1AD15C9100EF2AF5 /* MapView */,
+				163863A21AD15C9100EF2AF5 /* MessagesController.h */,
+				163863A31AD15C9100EF2AF5 /* MessagesController.m */,
+				163863A41AD15C9100EF2AF5 /* MessagesController.xib */,
+				163863A51AD15C9100EF2AF5 /* RearController */,
+				163863A91AD15C9100EF2AF5 /* Resources */,
+				163863AA1AD15C9100EF2AF5 /* SWRevealViewController */,
+				163863711AD15BEB00EF2AF5 /* AppDelegate.h */,
+				163863721AD15BEB00EF2AF5 /* AppDelegate.m */,
+				163863771AD15BEB00EF2AF5 /* ViewController.h */,
+				163863781AD15BEB00EF2AF5 /* ViewController.m */,
+				1638637D1AD15BEB00EF2AF5 /* Images.xcassets */,
+				1638637F1AD15BEB00EF2AF5 /* LaunchScreen.xib */,
+				163863741AD15BEB00EF2AF5 /* iLoGaVE.xcdatamodeld */,
+				1638636D1AD15BEB00EF2AF5 /* Supporting Files */,
+			);
+			path = iLoGaVE;
+			sourceTree = "<group>";
+		};
+		1638636D1AD15BEB00EF2AF5 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1638636E1AD15BEB00EF2AF5 /* Info.plist */,
+				1638636F1AD15BEB00EF2AF5 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		163863891AD15BEB00EF2AF5 /* iLoGaVETests */ = {
+			isa = PBXGroup;
+			children = (
+				1638638C1AD15BEB00EF2AF5 /* iLoGaVETests.m */,
+				1638638A1AD15BEB00EF2AF5 /* Supporting Files */,
+			);
+			path = iLoGaVETests;
+			sourceTree = "<group>";
+		};
+		1638638A1AD15BEB00EF2AF5 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1638638B1AD15BEB00EF2AF5 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		163863961AD15C9100EF2AF5 /* FrontView */ = {
+			isa = PBXGroup;
+			children = (
+				163863971AD15C9100EF2AF5 /* FrontViewController.h */,
+				163863981AD15C9100EF2AF5 /* FrontViewController.m */,
+				163863991AD15C9100EF2AF5 /* FrontViewController.xib */,
+			);
+			path = FrontView;
+			sourceTree = SOURCE_ROOT;
+		};
+		1638639E1AD15C9100EF2AF5 /* MapView */ = {
+			isa = PBXGroup;
+			children = (
+				1638639F1AD15C9100EF2AF5 /* MapViewController.h */,
+				163863A01AD15C9100EF2AF5 /* MapViewController.m */,
+				163863A11AD15C9100EF2AF5 /* MapViewController.xib */,
+			);
+			path = MapView;
+			sourceTree = SOURCE_ROOT;
+		};
+		163863A51AD15C9100EF2AF5 /* RearController */ = {
+			isa = PBXGroup;
+			children = (
+				163863A61AD15C9100EF2AF5 /* RearViewController.h */,
+				163863A71AD15C9100EF2AF5 /* RearViewController.m */,
+				163863A81AD15C9100EF2AF5 /* RearViewController.xib */,
+			);
+			path = RearController;
+			sourceTree = SOURCE_ROOT;
+		};
+		163863A91AD15C9100EF2AF5 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				163863BB1AD15DC600EF2AF5 /* reveal-icon.png */,
+				163863BC1AD15DC600EF2AF5 /* reveal-icon@2x.png */,
+			);
+			path = Resources;
+			sourceTree = SOURCE_ROOT;
+		};
+		163863AA1AD15C9100EF2AF5 /* SWRevealViewController */ = {
+			isa = PBXGroup;
+			children = (
+				163863AB1AD15C9100EF2AF5 /* SWRevealViewController.h */,
+				163863AC1AD15C9100EF2AF5 /* SWRevealViewController.m */,
+			);
+			path = SWRevealViewController;
+			sourceTree = SOURCE_ROOT;
+		};
+		16724C971AD450FE006C326C /* OSM */ = {
+			isa = PBXGroup;
+			children = (
+				16724C981AD450FE006C326C /* TileOverlay.h */,
+				16724C991AD450FE006C326C /* TileOverlay.m */,
+				16724C9A1AD450FE006C326C /* TileOverlayView.h */,
+				16724C9B1AD450FE006C326C /* TileOverlayView.m */,
+			);
+			path = OSM;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		163863691AD15BEB00EF2AF5 /* iLoGaVE */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 163863901AD15BEB00EF2AF5 /* Build configuration list for PBXNativeTarget "iLoGaVE" */;
+			buildPhases = (
+				163863661AD15BEB00EF2AF5 /* Sources */,
+				163863671AD15BEB00EF2AF5 /* Frameworks */,
+				163863681AD15BEB00EF2AF5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = iLoGaVE;
+			productName = iLoGaVE;
+			productReference = 1638636A1AD15BEB00EF2AF5 /* iLoGaVE.app */;
+			productType = "com.apple.product-type.application";
+		};
+		163863851AD15BEB00EF2AF5 /* iLoGaVETests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 163863931AD15BEB00EF2AF5 /* Build configuration list for PBXNativeTarget "iLoGaVETests" */;
+			buildPhases = (
+				163863821AD15BEB00EF2AF5 /* Sources */,
+				163863831AD15BEB00EF2AF5 /* Frameworks */,
+				163863841AD15BEB00EF2AF5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				163863881AD15BEB00EF2AF5 /* PBXTargetDependency */,
+			);
+			name = iLoGaVETests;
+			productName = iLoGaVETests;
+			productReference = 163863861AD15BEB00EF2AF5 /* iLoGaVETests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		163863621AD15BEB00EF2AF5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0620;
+				ORGANIZATIONNAME = BSUIR;
+				TargetAttributes = {
+					163863691AD15BEB00EF2AF5 = {
+						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = S6T4VJ437P;
+					};
+					163863851AD15BEB00EF2AF5 = {
+						CreatedOnToolsVersion = 6.2;
+						TestTargetID = 163863691AD15BEB00EF2AF5;
+					};
+				};
+			};
+			buildConfigurationList = 163863651AD15BEB00EF2AF5 /* Build configuration list for PBXProject "iLoGaVE" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 163863611AD15BEB00EF2AF5;
+			productRefGroup = 1638636B1AD15BEB00EF2AF5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				163863691AD15BEB00EF2AF5 /* iLoGaVE */,
+				163863851AD15BEB00EF2AF5 /* iLoGaVETests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		163863681AD15BEB00EF2AF5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				163863B01AD15C9100EF2AF5 /* LoginViewController.xib in Resources */,
+				163863AE1AD15C9100EF2AF5 /* FrontViewController.xib in Resources */,
+				163863B51AD15C9100EF2AF5 /* MessagesController.xib in Resources */,
+				163863B11AD15C9100EF2AF5 /* MainView.xib in Resources */,
+				163863B31AD15C9100EF2AF5 /* MapViewController.xib in Resources */,
+				163863BD1AD15DC600EF2AF5 /* reveal-icon.png in Resources */,
+				163863BE1AD15DC600EF2AF5 /* reveal-icon@2x.png in Resources */,
+				163863811AD15BEB00EF2AF5 /* LaunchScreen.xib in Resources */,
+				163863B71AD15C9100EF2AF5 /* RearViewController.xib in Resources */,
+				1638637E1AD15BEB00EF2AF5 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		163863841AD15BEB00EF2AF5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		163863661AD15BEB00EF2AF5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				162C344F1AD4777B0083246F /* CustomOverlayView.m in Sources */,
+				163863731AD15BEB00EF2AF5 /* AppDelegate.m in Sources */,
+				162C344C1AD475330083246F /* OSMTileOverlay.m in Sources */,
+				163863701AD15BEB00EF2AF5 /* main.m in Sources */,
+				163863AF1AD15C9100EF2AF5 /* LoginViewController.m in Sources */,
+				163863B41AD15C9100EF2AF5 /* MessagesController.m in Sources */,
+				163863B61AD15C9100EF2AF5 /* RearViewController.m in Sources */,
+				163863791AD15BEB00EF2AF5 /* ViewController.m in Sources */,
+				163863761AD15BEB00EF2AF5 /* iLoGaVE.xcdatamodeld in Sources */,
+				16724C9D1AD450FE006C326C /* TileOverlayView.m in Sources */,
+				16724C9C1AD450FE006C326C /* TileOverlay.m in Sources */,
+				163863B81AD15C9100EF2AF5 /* SWRevealViewController.m in Sources */,
+				163863AD1AD15C9100EF2AF5 /* FrontViewController.m in Sources */,
+				163863B21AD15C9100EF2AF5 /* MapViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		163863821AD15BEB00EF2AF5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1638638D1AD15BEB00EF2AF5 /* iLoGaVETests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		163863881AD15BEB00EF2AF5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 163863691AD15BEB00EF2AF5 /* iLoGaVE */;
+			targetProxy = 163863871AD15BEB00EF2AF5 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		1638637F1AD15BEB00EF2AF5 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				163863801AD15BEB00EF2AF5 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1638638E1AD15BEB00EF2AF5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		1638638F1AD15BEB00EF2AF5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		163863911AD15BEB00EF2AF5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = iLoGaVE/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		163863921AD15BEB00EF2AF5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = iLoGaVE/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		163863941AD15BEB00EF2AF5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = iLoGaVETests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iLoGaVE.app/iLoGaVE";
+			};
+			name = Debug;
+		};
+		163863951AD15BEB00EF2AF5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = iLoGaVETests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iLoGaVE.app/iLoGaVE";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		163863651AD15BEB00EF2AF5 /* Build configuration list for PBXProject "iLoGaVE" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1638638E1AD15BEB00EF2AF5 /* Debug */,
+				1638638F1AD15BEB00EF2AF5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		163863901AD15BEB00EF2AF5 /* Build configuration list for PBXNativeTarget "iLoGaVE" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				163863911AD15BEB00EF2AF5 /* Debug */,
+				163863921AD15BEB00EF2AF5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		163863931AD15BEB00EF2AF5 /* Build configuration list for PBXNativeTarget "iLoGaVETests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				163863941AD15BEB00EF2AF5 /* Debug */,
+				163863951AD15BEB00EF2AF5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		163863741AD15BEB00EF2AF5 /* iLoGaVE.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				163863751AD15BEB00EF2AF5 /* iLoGaVE.xcdatamodel */,
+			);
+			currentVersion = 163863751AD15BEB00EF2AF5 /* iLoGaVE.xcdatamodel */;
+			path = iLoGaVE.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 163863621AD15BEB00EF2AF5 /* Project object */;
+}
