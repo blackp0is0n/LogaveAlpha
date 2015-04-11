@@ -18,5 +18,7 @@
 @property (nonatomic,strong)MapViewController *mapViewController;
 @property (nonatomic,strong)FrontViewController *frontViewController;
 
+@property (strong,nonatomic)NSMutableData *receivedData;
+@property(nonatomic,strong)NSString *userKey;
 
 @end
