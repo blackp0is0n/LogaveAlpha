@@ -124,33 +124,46 @@
     NSString* data = [self fixUnicode:[[NSString alloc] initWithData:_receivedData encoding:NSUTF8StringEncoding]];
     NSError *e = nil;
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:_receivedData options:NSJSONReadingMutableContainers error:&e];
-    
-    NSString *status = json[@"status"];
-    //NSString *
-    
-    NSLog(@"\nValue is:%@",status);
-    //NSLog(@"\nLength is:%lu",(unsigned long)status.length);
-    if([status isEqual:@"200"]){
-    
+    NSLog(@"%@\n",data);
+    NSString *userInformation = json[@"data"][@"data"];
+    if([userInformation isEqual:@"User in not courier"]){
+        UIAlertView *errorAlert = [[UIAlertView alloc]
+                                   initWithTitle:@"Authorization Error" message:@"Please, check your login and password." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [errorAlert show];
+    } else {
+        NSLog(@"%@",json);
+        NSString *key = json[@"data"][@"data"][@"user"][@"key"];
+        //NSString *expDate= json[@"data"][@"data"][@"user"][@"expdate"];
+        UIAlertView *errorAlert = [[UIAlertView alloc]
+                                   initWithTitle:@"Welcome to the Jungle" message:@"Now, see this amazimg iPhone App." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [errorAlert show];
+        [self.loginField resignFirstResponder];
+        [self.passField resignFirstResponder];
+        
         UIWindow *window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
         self.window = window;
-    
+        
         FrontViewController *frontViewController = [[FrontViewController alloc] init];
         RearViewController *rearViewController = [[RearViewController alloc] init];
-    
+        [rearViewController setUserKey:key];
         UINavigationController *frontNavigationController = [[UINavigationController alloc] initWithRootViewController: frontViewController];
         UINavigationController *rearNavigationController = [[UINavigationController alloc] initWithRootViewController:rearViewController];
-    
+        
         SWRevealViewController *mainRevealController = [[SWRevealViewController alloc]
-                                                    initWithRearViewController:rearNavigationController frontViewController:frontNavigationController];
-    
+                                                        initWithRearViewController:rearNavigationController frontViewController:frontNavigationController];
+        
         mainRevealController.delegate = self;
-    
+        
         self.viewController = mainRevealController;
-    
+        
         self.window.rootViewController = self.viewController;
         [self.window makeKeyAndVisible];
     }
+    
+    //NSString *
+    //int a = [status intValue];
+    //NSLog(@"\nValue is:%d!",a);
+    [_activity stopAnimating];
 }
 
 @end
