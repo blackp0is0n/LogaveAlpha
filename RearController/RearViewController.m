@@ -16,12 +16,21 @@
 
 @synthesize rearTableView = _rearTableView;
 
+
+-(void)setUserKey:(NSString *)userKey{
+    _userKey = userKey;
+}
+-(NSString*)getUserKey{
+    return _userKey;
+}
+
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
     UIAlertView *errorAlert = [[UIAlertView alloc]
-                               initWithTitle:@"Rear Controller was loaded" message:@"You are awesome!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                               initWithTitle:@"Rear Controller was loaded" message:[NSString stringWithFormat:@"You are awesome!\nYour key:%@",[self getUserKey]] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [errorAlert show];
+    
     self.navigationItem.title = @"Logave";
 }
 
@@ -100,7 +109,22 @@
     }
 
     UIViewController *newFrontController = nil;
-
+    
+    
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL
+                                                                        URLWithString:@"http://api.logave.com/task/gettask?"]
+                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:15.0];
+    request.HTTPMethod = @"POST";
+    NSString * param = [NSString stringWithFormat:@"key=%@", [self getUserKey]];
+    request.HTTPBody = [param dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    
+    
+    if (connection) {
+        _receivedData = [[NSMutableData data] init];
+    }
+    
     if (row == 0)
     {
         if (_frontViewController == nil)
@@ -144,6 +168,26 @@
     _presentedRow = row; 
 }
 
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+{
+    [_receivedData setLength:0];
+}
 
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+{
+    
+    [_receivedData appendData:data];
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+    UIAlertView *errorAlert = [[UIAlertView alloc]
+                               initWithTitle:@"Error" message:@"Please, check your Internet Connection." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [errorAlert show];
+}
+
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    
+}
 
 @end
