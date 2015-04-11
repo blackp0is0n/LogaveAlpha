@@ -19,8 +19,8 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A4i-qX-MDD">
-                    <rect key="frame" x="10" y="323" width="581" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A4i-qX-MDD">
+                    <rect key="frame" x="8" y="372" width="584" height="30"/>
                     <state key="normal" title="Enter">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -28,25 +28,28 @@
                         <action selector="loginTouchedUp:" destination="-1" eventType="touchUpInside" id="846-mT-Ed0"/>
                     </connections>
                 </button>
-                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="3KU-25-sxA">
-                    <rect key="frame" x="291" y="243" width="20" height="20"/>
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="3KU-25-sxA">
+                    <rect key="frame" x="290" y="315" width="20" height="20"/>
                 </activityIndicatorView>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Login(e-mail)" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2fa-sP-DUm">
-                    <rect key="frame" x="11" y="214" width="580" height="30"/>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Login(e-mail)" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2fa-sP-DUm">
+                    <rect key="frame" x="8" y="277" width="583" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="done"/>
                     <connections>
                         <action selector="loginKeyboardHiding:" destination="-1" eventType="editingDidEndOnExit" id="FtK-jD-tWs"/>
                     </connections>
                 </textField>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bd7-k6-TXE">
-                    <rect key="frame" x="11" y="271" width="581" height="30"/>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bd7-k6-TXE">
+                    <rect key="frame" x="8" y="334" width="584" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done" secureTextEntry="YES"/>
                     <connections>
                         <action selector="passwordKeyboardHiding:" destination="-1" eventType="editingDidEndOnExit" id="iDX-tc-Ajb"/>
                     </connections>
                 </textField>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logave.png" highlighted="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jou-bl-zdb">
+                    <rect key="frame" x="8" y="74" width="302" height="132"/>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -68,4 +71,7 @@
             <point key="canvasLocation" x="396" y="242"/>
         </view>
     </objects>
+    <resources>
+        <image name="logave.png" width="500" height="400"/>
+    </resources>
 </document>
