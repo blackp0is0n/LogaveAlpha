@@ -8,6 +8,7 @@
 @interface RearViewController()
 {
     NSInteger _presentedRow;
+    bool answerWasObtained;
 }
 
 @end
@@ -26,10 +27,8 @@
 
 - (void)viewDidLoad
 {
+    
 	[super viewDidLoad];
-    UIAlertView *errorAlert = [[UIAlertView alloc]
-                               initWithTitle:@"Rear Controller was loaded" message:[NSString stringWithFormat:@"You are awesome!\nYour key:%@",[self getUserKey]] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [errorAlert show];
     
     self.navigationItem.title = @"Logave";
 }
@@ -109,26 +108,15 @@
     }
 
     UIViewController *newFrontController = nil;
-    
-    
-    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL
-                                                                        URLWithString:@"http://api.logave.com/task/gettask?"]
-                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:15.0];
-    request.HTTPMethod = @"POST";
-    NSString * param = [NSString stringWithFormat:@"key=%@", [self getUserKey]];
-    request.HTTPBody = [param dataUsingEncoding:NSUTF8StringEncoding];
-    
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-    
-    
-    if (connection) {
-        _receivedData = [[NSMutableData data] init];
-    }
+    answerWasObtained = false;
+
+
     
     if (row == 0)
     {
         if (_frontViewController == nil)
             _frontViewController = [[FrontViewController alloc] init];
+        [_frontViewController setUserKey:[self getUserKey]];
         newFrontController = [[UINavigationController alloc] initWithRootViewController:_frontViewController];
     }
     else if (row == 1)
@@ -145,20 +133,11 @@
         newFrontController = [[UINavigationController alloc] initWithRootViewController:_messagesController];
     }
     else if( row == 3){
-        _messagesController = nil;
-        _mapViewController = nil;
-        _frontViewController = nil;
-        self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-        self.window.backgroundColor = [UIColor whiteColor];
-        self.loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
-        self.window.rootViewController = self.loginViewController;
-        
-        [self.window makeKeyAndVisible];
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Are you sure?" message:@"If want to sign out,press YES" delegate:self cancelButtonTitle:@"NO" otherButtonTitles: @"YES",nil];
+        [alert show];
+        [revealController setFrontViewPosition:FrontViewPositionLeft animated:YES];
+        return;
     } else if(row == 4){
-        //if(_viewController == nil){
-            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Простой alert" message:@"Это простой UIAlertView, он просто показывает сообщение" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [alert show];
-        //}
         [revealController setFrontViewPosition:FrontViewPositionLeft animated:YES];
         return;
     }
@@ -166,6 +145,35 @@
     [revealController pushFrontViewController:newFrontController animated:YES];
     
     _presentedRow = row; 
+}
+
+-(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1) {
+        NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL
+                                                                            URLWithString:@"http://api.logave.com/user/logout"]
+                                                               cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:15.0];
+        request.HTTPMethod = @"POST";
+        NSString * param = [NSString stringWithFormat:@""];
+        request.HTTPBody = [param dataUsingEncoding:NSUTF8StringEncoding];
+        
+        NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+        
+        if(!connection){
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Error with logging out" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
+        } else {
+            _messagesController = nil;
+            _mapViewController = nil;
+            _frontViewController = nil;
+            self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+            self.window.backgroundColor = [UIColor whiteColor];
+            self.loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+            self.window.rootViewController = self.loginViewController;
+            
+            [self.window makeKeyAndVisible];
+        }
+        
+    }
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
@@ -187,7 +195,7 @@
 
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    
+    answerWasObtained = true;
 }
 
 @end

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		162C344C1AD475330083246F /* OSMTileOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 162C34491AD475330083246F /* OSMTileOverlay.m */; };
 		162C344F1AD4777B0083246F /* CustomOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 162C344E1AD4777B0083246F /* CustomOverlayView.m */; };
+		163077761AD815AA003D611D /* logave.png in Resources */ = {isa = PBXBuildFile; fileRef = 163077751AD815AA003D611D /* logave.png */; };
 		163191C71AD3B67D00000D87 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 163191C61AD3B67D00000D87 /* CoreLocation.framework */; };
 		163863701AD15BEB00EF2AF5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1638636F1AD15BEB00EF2AF5 /* main.m */; };
 		163863731AD15BEB00EF2AF5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 163863721AD15BEB00EF2AF5 /* AppDelegate.m */; };
@@ -52,6 +53,7 @@
 		162C344A1AD475330083246F /* TileOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TileOverlay.h; sourceTree = "<group>"; };
 		162C344D1AD4777B0083246F /* CustomOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomOverlayView.h; sourceTree = "<group>"; };
 		162C344E1AD4777B0083246F /* CustomOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomOverlayView.m; sourceTree = "<group>"; };
+		163077751AD815AA003D611D /* logave.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logave.png; sourceTree = "<group>"; };
 		163191C61AD3B67D00000D87 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		1638636A1AD15BEB00EF2AF5 /* iLoGaVE.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iLoGaVE.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1638636E1AD15BEB00EF2AF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -233,6 +235,7 @@
 		163863A91AD15C9100EF2AF5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				163077751AD815AA003D611D /* logave.png */,
 				163863BB1AD15DC600EF2AF5 /* reveal-icon.png */,
 				163863BC1AD15DC600EF2AF5 /* reveal-icon@2x.png */,
 			);
@@ -344,6 +347,7 @@
 				163863AE1AD15C9100EF2AF5 /* FrontViewController.xib in Resources */,
 				163863B51AD15C9100EF2AF5 /* MessagesController.xib in Resources */,
 				163863B11AD15C9100EF2AF5 /* MainView.xib in Resources */,
+				163077761AD815AA003D611D /* logave.png in Resources */,
 				163863B31AD15C9100EF2AF5 /* MapViewController.xib in Resources */,
 				163863BD1AD15DC600EF2AF5 /* reveal-icon.png in Resources */,
 				163863BE1AD15DC600EF2AF5 /* reveal-icon@2x.png in Resources */,

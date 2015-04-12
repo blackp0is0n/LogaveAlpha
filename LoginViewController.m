@@ -121,12 +121,14 @@
 
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    [self.loginField resignFirstResponder];
+    [self.passField resignFirstResponder];
     NSString* data = [self fixUnicode:[[NSString alloc] initWithData:_receivedData encoding:NSUTF8StringEncoding]];
     NSError *e = nil;
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:_receivedData options:NSJSONReadingMutableContainers error:&e];
     NSLog(@"%@\n",data);
     NSString *userInformation = json[@"data"][@"data"];
-    if([userInformation isEqual:@"User in not courier"]){
+    if([userInformation isEqual:@"User is not courier"]){
         UIAlertView *errorAlert = [[UIAlertView alloc]
                                    initWithTitle:@"Authorization Error" message:@"Please, check your login and password." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [errorAlert show];
@@ -134,16 +136,12 @@
         NSLog(@"%@",json);
         NSString *key = json[@"data"][@"data"][@"user"][@"key"];
         //NSString *expDate= json[@"data"][@"data"][@"user"][@"expdate"];
-        UIAlertView *errorAlert = [[UIAlertView alloc]
-                                   initWithTitle:@"Welcome to the Jungle" message:@"Now, see this amazimg iPhone App." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [errorAlert show];
-        [self.loginField resignFirstResponder];
-        [self.passField resignFirstResponder];
         
         UIWindow *window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
         self.window = window;
         
         FrontViewController *frontViewController = [[FrontViewController alloc] init];
+        [frontViewController setUserKey:key];
         RearViewController *rearViewController = [[RearViewController alloc] init];
         [rearViewController setUserKey:key];
         UINavigationController *frontNavigationController = [[UINavigationController alloc] initWithRootViewController: frontViewController];

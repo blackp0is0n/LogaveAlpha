@@ -7,7 +7,7 @@
 #import "MessagesController.h"
 
 
-@interface RearViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface RearViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) LoginViewController *loginViewController;
