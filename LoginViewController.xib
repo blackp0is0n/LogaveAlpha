@@ -47,7 +47,7 @@
                         <action selector="passwordKeyboardHiding:" destination="-1" eventType="editingDidEndOnExit" id="iDX-tc-Ajb"/>
                     </connections>
                 </textField>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logave.png" highlighted="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jou-bl-zdb">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logave.png" translatesAutoresizingMaskIntoConstraints="NO" id="Jou-bl-zdb">
                     <rect key="frame" x="8" y="74" width="302" height="132"/>
                 </imageView>
             </subviews>

@@ -3,10 +3,12 @@
 #import "FrontViewController.h"
 #import "SWRevealViewController.h"
 
+
 @interface FrontViewController()
 @property (strong, nonatomic) UIWindow *window;
 
 - (IBAction)pushExample:(id)sender;
+
 
 @end
 
@@ -28,7 +30,11 @@
         style:UIBarButtonItemStyleDone target:revealController action:@selector(revealToggle:)];
     
     self.navigationItem.leftBarButtonItem = revealButtonItem;
+    
+    UIBarButtonItem * topRightButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(rightButtonPressed:)];
+    self.navigationItem.rightBarButtonItem = topRightButton;
 
+    
     
     [_mapView setDelegate:self];
     OSMTileOverlay *overlay = [[OSMTileOverlay alloc] init];
@@ -55,6 +61,13 @@
     
 
 }
+
+-(void)rightButtonPressed:(id) sender{
+    
+}
+
+
+
 
 -(void)setUserKey:(NSString *)userKey{
     _userKey = userKey;

@@ -20,5 +20,5 @@
 
 @property (strong,nonatomic)NSMutableData *receivedData;
 @property(nonatomic,strong)NSString *userKey;
-
+@property (nonatomic,strong)UIDatePicker *datePicker;
 @end
