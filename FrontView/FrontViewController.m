@@ -31,10 +31,10 @@
     
     self.navigationItem.leftBarButtonItem = revealButtonItem;
     
-    UIBarButtonItem * topRightButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(rightButtonPressed:)];
+    UIBarButtonItem * topRightButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(rightButtonPressed:)];
     self.navigationItem.rightBarButtonItem = topRightButton;
 
-    
+    [_mapView removeAnnotations:_mapView.annotations];
     
     [_mapView setDelegate:self];
     OSMTileOverlay *overlay = [[OSMTileOverlay alloc] init];
@@ -63,7 +63,22 @@
 }
 
 -(void)rightButtonPressed:(id) sender{
+    RMDateSelectionViewController *dateSelectionVC = [RMDateSelectionViewController dateSelectionController];
     
+    //Set a title for the date selection
+    dateSelectionVC.titleLabel.text = @"This is an example title.\n\nPlease choose a date and press 'Select' or 'Cancel'.";
+    
+    //Set select and (optional) cancel blocks
+    [dateSelectionVC setSelectButtonAction:^(RMDateSelectionViewController *controller, NSDate *date) {
+        NSLog(@"Successfully selected date: %@", date);
+    }];
+    dateSelectionVC.datePicker.datePickerMode = UIDatePickerModeDate;
+    
+    [dateSelectionVC setCancelButtonAction:^(RMDateSelectionViewController *controller) {
+        NSLog(@"Date selection was canceled");
+    }];
+
+    [self presentViewController:dateSelectionVC animated:YES completion:nil];
 }
 
 
