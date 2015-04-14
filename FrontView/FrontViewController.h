@@ -12,7 +12,8 @@
 @property (strong, nonatomic) IBOutlet MKMapView *mapView;
 @property(nonatomic,strong)NSString *userKey;
 @property (strong,nonatomic)NSMutableData *receivedData;
-
+@property (strong,nonatomic) NSDate *presentData;
 @property (strong,nonatomic)UIDatePicker *datePicker;
+@property(strong,nonatomic)RMDateSelectionViewController *myDatePicker;
 
 @end

@@ -20,7 +20,7 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-    
+    _presentData = [[NSDate alloc] init];
 	self.title = NSLocalizedString(@"Map with Tasks", nil);
     
     SWRevealViewController *revealController = [self revealViewController];
@@ -41,11 +41,54 @@
 
     [_mapView addOverlay:overlay];
     
+    NSDate *presentDate=[[NSDate alloc] init];
+    NSDateFormatter *format = [[NSDateFormatter alloc] init];
+    [format setDateFormat:@"yyyy-MM-dd"];
+    NSString *today = [format stringFromDate:presentDate];
+    
+    NSLog(@"Today is %@\n",today);
+
+    [self createTasksConnection:today key:[self getUserKey]];
+    
+
+}
+
+-(void)setAnnotationsToDate:(NSDate*)date{
+    NSDateFormatter *format = [[NSDateFormatter alloc] init];
+    [format setDateFormat:@"yyyy-MM-dd"];
+    NSString *selectedDate = [format stringFromDate:date];
+    [self createTasksConnection:selectedDate key:[self getUserKey]];
+}
+
+-(void)rightButtonPressed:(id) sender{
+    RMDateSelectionViewController *myDatePicker = [RMDateSelectionViewController dateSelectionController];
+    [myDatePicker setSelectButtonAction:^(RMDateSelectionViewController *controller, NSDate *date) {
+        [self setAnnotationsToDate:date];
+        NSLog(@"Successfully selected date: %@", date);
+        _presentData  = date;
+    }];
+    myDatePicker.titleLabel.text = @"Date picker.\n\nPlease choose a date and press 'Select' or 'Cancel'.";
+    
+    myDatePicker.datePicker.datePickerMode = UIDatePickerModeDate;
+    myDatePicker.datePicker.date = _presentData;
+    
+    myDatePicker.disableBouncingWhenShowing = true;
+    myDatePicker.disableMotionEffects = false;
+    myDatePicker.disableBlurEffects = true;
+    
+   /* [myDatePicker setCancelButtonAction:^(RMDateSelectionViewController *controller) {
+        NSLog(@"Date selection was canceled");
+    }];*/
+    [self presentViewController:myDatePicker animated:YES completion:nil];
+}
+
+
+-(void)createTasksConnection:(NSString*)date key:(NSString*)key{
     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL
                                                                         URLWithString:@"http://api.logave.com/task/gettask?"]
                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:15.0];
     request.HTTPMethod = @"POST";
-    NSString * param = [NSString stringWithFormat:@"key=%@&date=2015-03-24",[self getUserKey]];
+    NSString * param = [NSString stringWithFormat:@"key=%@&date=%@",key,date];
     request.HTTPBody = [param dataUsingEncoding:NSUTF8StringEncoding];
     
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
@@ -57,32 +100,7 @@
     } else {
         _receivedData = [[NSMutableData data] init];
     }
-    
-    
-
 }
-
--(void)rightButtonPressed:(id) sender{
-    RMDateSelectionViewController *dateSelectionVC = [RMDateSelectionViewController dateSelectionController];
-    
-    //Set a title for the date selection
-    dateSelectionVC.titleLabel.text = @"This is an example title.\n\nPlease choose a date and press 'Select' or 'Cancel'.";
-    
-    //Set select and (optional) cancel blocks
-    [dateSelectionVC setSelectButtonAction:^(RMDateSelectionViewController *controller, NSDate *date) {
-        NSLog(@"Successfully selected date: %@", date);
-    }];
-    dateSelectionVC.datePicker.datePickerMode = UIDatePickerModeDate;
-    
-    [dateSelectionVC setCancelButtonAction:^(RMDateSelectionViewController *controller) {
-        NSLog(@"Date selection was canceled");
-    }];
-
-    [self presentViewController:dateSelectionVC animated:YES completion:nil];
-}
-
-
-
 
 -(void)setUserKey:(NSString *)userKey{
     _userKey = userKey;
@@ -116,6 +134,7 @@
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    [_mapView removeAnnotations:_mapView.annotations];
     if (_receivedData!=nil) {
         NSError *e = nil;
         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:_receivedData options:NSJSONReadingMutableContainers error:&e];
@@ -147,7 +166,7 @@
                 }
             } else {
                 UIAlertView *errorAlert = [[UIAlertView alloc]
-                                           initWithTitle:@"Congratulations" message:@"You have no tasks." delegate:nil  cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                                           initWithTitle:@"Congratulations" message:@"You have no tasks to selected day." delegate:nil  cancelButtonTitle:@"OK" otherButtonTitles:nil];
                 [errorAlert show];
             }
         }
