@@ -135,6 +135,7 @@
     else if( row == 3){
         UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Are you sure?" message:@"If want to sign out,press YES" delegate:self cancelButtonTitle:@"NO" otherButtonTitles: @"YES",nil];
         [alert show];
+        [_rearTableView deselectRowAtIndexPath:indexPath animated:false];
         [revealController setFrontViewPosition:FrontViewPositionLeft animated:YES];
         return;
     } else if(row == 4){

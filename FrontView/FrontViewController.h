@@ -7,7 +7,9 @@
 #import "CustomOverlayView.h"
 #import "RMDateSelectionViewController.h"
 
-@interface FrontViewController : UIViewController<MKMapViewDelegate>
+@interface FrontViewController : UIViewController<MKMapViewDelegate>{
+    
+}
 
 @property (strong, nonatomic) IBOutlet MKMapView *mapView;
 @property(nonatomic,strong)NSString *userKey;
