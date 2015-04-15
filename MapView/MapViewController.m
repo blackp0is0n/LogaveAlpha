@@ -29,30 +29,61 @@
     
 }
 
-#pragma mark - Table View Data source
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:
 (NSInteger)section{
-    return 0;
+    return [myData count]/2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:
 (NSIndexPath *)indexPath{
-    return nil;
+    static NSString *cellIdentifier = @"cellID";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:
+                             cellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc]initWithStyle:
+                UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
+    NSString *stringForCell;
+    if (indexPath.section == 0) {
+        stringForCell= [myData objectAtIndex:indexPath.row];
+        
+    }
+    else if (indexPath.section == 1){
+        stringForCell= [myData objectAtIndex:indexPath.row+ [myData count]/2];
+        
+    }
+    [cell.textLabel setText:stringForCell];
+    return cell;
 }
 
 // Default is 1 if not implemented
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 1;
+    return 2;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:
 (NSInteger)section{
-    NSString *headerTitle = @"Section 1 Header";
+    NSString *headerTitle;
+    if (section==0) {
+        headerTitle = @"Section 1 Header";
+    }
+    else{
+        headerTitle = @"Section 2 Header";
+        
+    }
     return headerTitle;
 }
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:
 (NSInteger)section{
-    NSString *footerTitle = @"Section 1 Footer";
+    NSString *footerTitle;
+    if (section==0) {
+        footerTitle = @"Section 1 Footer";
+    }
+    else{
+        footerTitle = @"Section 2 Footer";
+        
+    }
     return footerTitle;
 }
 
@@ -64,7 +95,9 @@
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     NSLog(@"Section:%ld Row:%ld selected and its data is %@",
           (long)indexPath.section,(long)indexPath.row,cell.textLabel.text);
+    UIViewController *stubController = [[UIViewController alloc] init];
+    stubController.title = @"Task details";
+    stubController.view.backgroundColor = [UIColor whiteColor];
+    [self.navigationController pushViewController:stubController animated:YES];
 }
-
-
 @end
