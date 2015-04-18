@@ -20,7 +20,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A4i-qX-MDD">
-                    <rect key="frame" x="8" y="361" width="584" height="30"/>
+                    <rect key="frame" x="8" y="371" width="584" height="30"/>
                     <state key="normal" title="Enter">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -31,21 +31,10 @@
                 <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="3KU-25-sxA">
                     <rect key="frame" x="290" y="315" width="20" height="20"/>
                 </activityIndicatorView>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Login(e-mail)" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2fa-sP-DUm">
-                    <rect key="frame" x="8" y="285" width="584" height="30"/>
-                    <constraints>
-                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="6cZ-UW-xCE"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="done"/>
-                    <connections>
-                        <action selector="loginKeyboardHiding:" destination="-1" eventType="editingDidEndOnExit" id="FtK-jD-tWs"/>
-                    </connections>
-                </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bd7-k6-TXE">
                     <rect key="frame" x="8" y="323" width="584" height="30"/>
                     <constraints>
-                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="hvw-BR-zOh"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="hvw-BR-zOh"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done" secureTextEntry="YES"/>
@@ -56,6 +45,17 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="logave.png" translatesAutoresizingMaskIntoConstraints="NO" id="EPg-1L-xbh">
                     <rect key="frame" x="180" y="136" width="240" height="128"/>
                 </imageView>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Login(e-mail)" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2fa-sP-DUm">
+                    <rect key="frame" x="8" y="285" width="584" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="6cZ-UW-xCE"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="done"/>
+                    <connections>
+                        <action selector="loginKeyboardHiding:" destination="-1" eventType="editingDidEndOnExit" id="FtK-jD-tWs"/>
+                    </connections>
+                </textField>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -75,7 +75,7 @@
                 <constraint firstItem="2fa-sP-DUm" firstAttribute="centerX" secondItem="3KU-25-sxA" secondAttribute="centerX" id="pso-Yk-MTH"/>
                 <constraint firstAttribute="centerY" secondItem="EPg-1L-xbh" secondAttribute="centerY" constant="100" id="pzo-dB-QxY"/>
                 <constraint firstItem="A4i-qX-MDD" firstAttribute="trailing" secondItem="2fa-sP-DUm" secondAttribute="trailing" id="qQ1-7X-pHf"/>
-                <constraint firstAttribute="centerY" secondItem="A4i-qX-MDD" secondAttribute="centerY" constant="-75" id="qZ6-39-7FA"/>
+                <constraint firstAttribute="centerY" secondItem="A4i-qX-MDD" secondAttribute="centerY" constant="-80" id="qZ6-39-7FA"/>
                 <constraint firstItem="3KU-25-sxA" firstAttribute="centerX" secondItem="Bd7-k6-TXE" secondAttribute="centerX" id="u9N-lj-qSy"/>
             </constraints>
             <variation key="default">
