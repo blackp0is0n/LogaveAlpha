@@ -2,7 +2,7 @@
 
 #import "MapViewController.h"
 #import "SWRevealViewController.h"
-
+#import "DetailTaskController.h"
 @implementation MapViewController
 
 #pragma mark - View lifecycle
@@ -95,7 +95,7 @@
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     NSLog(@"Section:%ld Row:%ld selected and its data is %@",
           (long)indexPath.section,(long)indexPath.row,cell.textLabel.text);
-    UIViewController *stubController = [[UIViewController alloc] init];
+    DetailTaskController *stubController = [[DetailTaskController alloc] init];
     stubController.title = @"Task details";
     stubController.view.backgroundColor = [UIColor whiteColor];
     [self.navigationController pushViewController:stubController animated:YES];
