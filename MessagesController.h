@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface MessagesController : UIViewController
+@property (strong, nonatomic) IBOutlet UIScrollView *myScrollView;
 
 @end
