@@ -1,7 +1,6 @@
 
 
 #import "RearViewController.h"
-
 #import "SWRevealViewController.h"
 
 
@@ -114,15 +113,18 @@
     
     if (row == 0)
     {
-        if (_frontViewController == nil)
+        if (_frontViewController == nil){
             _frontViewController = [[FrontViewController alloc] init];
+        } else {
+            [self setUserKey:[_frontViewController getUserKey]];
+        }
         [_frontViewController setUserKey:[self getUserKey]];
         newFrontController = [[UINavigationController alloc] initWithRootViewController:_frontViewController];
     }
     else if (row == 1)
     {
-        if(_mapViewController == nil)
             _mapViewController = [[MapViewController alloc] init];
+
         newFrontController = [[UINavigationController alloc] initWithRootViewController:_mapViewController];
     }
     

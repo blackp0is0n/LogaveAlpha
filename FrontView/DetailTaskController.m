@@ -9,6 +9,7 @@
 #import "DetailTaskController.h"
 
 @interface DetailTaskController ()
+- (IBAction)CompletePressed:(UIButton *)sender;
 
 @end
 
@@ -34,4 +35,7 @@
 }
 */
 
+- (IBAction)CompletePressed:(UIButton *)sender {
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
 @end

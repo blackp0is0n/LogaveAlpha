@@ -18,4 +18,7 @@
 @property (strong,nonatomic)UIDatePicker *datePicker;
 @property(strong,nonatomic)RMDateSelectionViewController *myDatePicker;
 
+
+-(void)setUserKey:(NSString *)userKey;
+-(NSString*)getUserKey;
 @end

@@ -144,6 +144,7 @@
         [frontViewController setUserKey:key];
         RearViewController *rearViewController = [[RearViewController alloc] init];
         [rearViewController setUserKey:key];
+        rearViewController.frontViewController = frontViewController;
         UINavigationController *frontNavigationController = [[UINavigationController alloc] initWithRootViewController: frontViewController];
         UINavigationController *rearNavigationController = [[UINavigationController alloc] initWithRootViewController:rearViewController];
         
