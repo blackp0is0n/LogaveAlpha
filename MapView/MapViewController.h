@@ -7,5 +7,6 @@
 }
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
 
+- (IBAction)pushhh:(UIButton *)sender;
 
 @end

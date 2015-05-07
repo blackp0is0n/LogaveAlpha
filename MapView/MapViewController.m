@@ -21,11 +21,7 @@
         style:UIBarButtonItemStyleDone target:revealController action:@selector(revealToggle:)];
     
     self.navigationItem.leftBarButtonItem = revealButtonItem;
-    myData = [[NSMutableArray alloc]initWithObjects:
-              @"Data 1 in array",@"Data 2 in array",@"Data 3 in array",
-              @"Data 4 in array",@"Data 5 in array",@"Data 5 in array",
-              @"Data 6 in array",@"Data 7 in array",@"Data 8 in array",
-              @"Data 9 in array", nil];
+
     
 }
 
@@ -99,5 +95,16 @@
     stubController.title = @"Task details";
     stubController.view.backgroundColor = [UIColor whiteColor];
     [self.navigationController pushViewController:stubController animated:YES];
+}
+- (IBAction)pushhh:(UIButton *)sender {
+    myData = [[NSMutableArray alloc]initWithObjects:
+              @"Data 1 in array",@"Data 2 in array",@"Data 3 in array",
+              @"Data 4 in array",@"Data 5 in array",@"Data 5 in array",
+              @"Data 6 in array",@"Data 7 in array",@"Data 8 in array",
+              @"Data 9 in array", nil];
+    NSRange range = NSMakeRange(0, [self numberOfSectionsInTableView:self.myTableView]);
+    NSIndexSet *sections = [NSIndexSet indexSetWithIndexesInRange:range];
+    [self.myTableView reloadSections:sections withRowAnimation:UITableViewRowAnimationAutomatic];
+    //[self.myTableView reloadData];
 }
 @end
