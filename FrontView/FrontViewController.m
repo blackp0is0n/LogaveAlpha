@@ -21,7 +21,7 @@
 {
 	[super viewDidLoad];
     _presentData = [[NSDate alloc] init];
-	self.title = NSLocalizedString(@"Map with Tasks", nil);
+	
     
     SWRevealViewController *revealController = [self revealViewController];
     
@@ -46,6 +46,12 @@
     [format setDateFormat:@"yyyy-MM-dd"];
     NSString *today = [format stringFromDate:presentDate];
     
+    NSDateFormatter *titleFormat = [[NSDateFormatter alloc] init];
+    [titleFormat setDateFormat:@"d MMMM, yyyy"];
+    NSString *titleDate = [titleFormat stringFromDate:presentDate];
+    
+    
+    self.title = NSLocalizedString(titleDate, nil);
     NSLog(@"Today is %@\n",today);
 
     [self createTasksConnection:today key:[self getUserKey]];
@@ -56,7 +62,13 @@
 -(void)setAnnotationsToDate:(NSDate*)date{
     NSDateFormatter *format = [[NSDateFormatter alloc] init];
     [format setDateFormat:@"yyyy-MM-dd"];
+    
+    NSDateFormatter *titleFormat = [[NSDateFormatter alloc] init];
+    [titleFormat setDateFormat:@"d MMMM, yyyy"];
+    NSString *titleDate = [titleFormat stringFromDate:date];
+    
     NSString *selectedDate = [format stringFromDate:date];
+    self.title = NSLocalizedString(titleDate, nil);
     [self createTasksConnection:selectedDate key:[self getUserKey]];
 }
 

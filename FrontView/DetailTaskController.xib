@@ -16,6 +16,16 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L9i-pp-Hao">
+                    <rect key="frame" x="8" y="525" width="102" height="30"/>
+                    <state key="normal" title="Complete Task"/>
+                    <variation key="widthClass=compact" fixedFrame="YES">
+                        <rect key="frame" x="8" y="570" width="384" height="30"/>
+                    </variation>
+                    <connections>
+                        <action selector="CompletePressed:" destination="-1" eventType="touchUpInside" id="eWi-Zy-Ig8"/>
+                    </connections>
+                </button>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HQl-CG-K1w">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="327"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -23,16 +33,9 @@
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     <variation key="widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="0.0" y="0.0" width="400" height="327"/>
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="562"/>
                     </variation>
                 </textView>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L9i-pp-Hao">
-                    <rect key="frame" x="8" y="525" width="102" height="30"/>
-                    <state key="normal" title="Complete Task"/>
-                    <connections>
-                        <action selector="CompletePressed:" destination="-1" eventType="touchUpInside" id="eWi-Zy-Ig8"/>
-                    </connections>
-                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <point key="canvasLocation" x="329" y="242"/>
