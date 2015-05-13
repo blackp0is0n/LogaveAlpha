@@ -14,7 +14,6 @@
 @property (strong,nonatomic)NSString* taskID;
 @property (strong,nonatomic)NSString* managerID;
 @property (strong,nonatomic)NSString* taskAddress;
-@property (strong,nonatomic)NSString* taskActive;
 @property (strong,nonatomic)NSString* name;
 @property (strong,nonatomic)NSString* sname;
 @property (strong,nonatomic)NSString* phone;

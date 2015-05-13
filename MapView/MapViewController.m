@@ -10,7 +10,7 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-	
+	_presentData = [[NSDate alloc] init];
 	self.title = NSLocalizedString(@"Tasks", nil);
     
     SWRevealViewController *revealController = [self revealViewController];
@@ -19,16 +19,62 @@
     
     UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"reveal-icon.png"]
         style:UIBarButtonItemStyleDone target:revealController action:@selector(revealToggle:)];
-    
     self.navigationItem.leftBarButtonItem = revealButtonItem;
 
     
+    
+    UIBarButtonItem * topRightButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(rightButtonPressed:)];
+    self.navigationItem.rightBarButtonItem = topRightButton;
+    
+    NSDateFormatter *titleFormat = [[NSDateFormatter alloc] init];
+    [titleFormat setDateFormat:@"d MMMM, yyyy"];
+    NSString *titleDate = [titleFormat stringFromDate:_presentData];
+    
+    
+    self.title = NSLocalizedString(titleDate, nil);
 }
+
+
+
+-(void)rightButtonPressed:(id) sender{
+    RMDateSelectionViewController *myDatePicker = [RMDateSelectionViewController dateSelectionController];
+    [myDatePicker setSelectButtonAction:^(RMDateSelectionViewController *controller, NSDate *date) {
+        NSDateFormatter *format = [[NSDateFormatter alloc] init];
+        [format setDateFormat:@"d MMMM, yyyy"];
+        NSString *selectedDate = [format stringFromDate:date];
+        self.title = NSLocalizedString(selectedDate, nil);
+        
+        NSLog(@"Successfully selected date: %@", date);
+        _presentData  = date;
+    }];
+    myDatePicker.titleLabel.text = @"Date picker.\n\nPlease choose a date and press 'Select' or 'Cancel'.";
+    
+    myDatePicker.datePicker.datePickerMode = UIDatePickerModeDate;
+    myDatePicker.datePicker.date = _presentData;
+    
+    myDatePicker.disableBouncingWhenShowing = true;
+    myDatePicker.disableMotionEffects = false;
+    myDatePicker.disableBlurEffects = true;
+    
+    /* [myDatePicker setCancelButtonAction:^(RMDateSelectionViewController *controller) {
+     NSLog(@"Date selection was canceled");
+     }];*/
+    [self presentViewController:myDatePicker animated:YES completion:nil];
+}
+
+
+
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:
 (NSInteger)section{
     return [myData count]/2;
 }
+
+
+
+
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:
 (NSIndexPath *)indexPath{

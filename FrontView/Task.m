@@ -10,4 +10,6 @@
 
 @implementation Task
 
+bool taskActive;
+
 @end
