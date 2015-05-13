@@ -118,15 +118,8 @@
 }
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:
 (NSInteger)section{
-    NSString *footerTitle;
-    if (section==0) {
-        footerTitle = @"Section 1 Footer";
-    }
-    else{
-        footerTitle = @"Section 2 Footer";
-        
-    }
-    return footerTitle;
+
+    return nil;
 }
 
 #pragma mark - TableView delegate

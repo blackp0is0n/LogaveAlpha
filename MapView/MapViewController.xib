@@ -16,18 +16,24 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="1Ny-5x-ExB">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="488"/>
+                    <rect key="frame" x="0.0" y="8" width="320" height="480"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <variation key="widthClass=compact" misplaced="YES">
+                        <rect key="frame" x="8" y="8" width="304" height="488"/>
+                    </variation>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="mB9-C7-5v9"/>
                         <outlet property="delegate" destination="-1" id="1u7-fk-gYR"/>
                     </connections>
                 </tableView>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8wM-Vv-TDe">
-                    <rect key="frame" x="137" y="496" width="46" height="30"/>
-                    <state key="normal" title="Button">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8wM-Vv-TDe">
+                    <rect key="frame" x="137" y="496" width="51" height="30"/>
+                    <state key="normal" title="Update">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <variation key="widthClass=compact" misplaced="YES">
+                        <rect key="frame" x="135" y="506" width="51" height="30"/>
+                    </variation>
                     <connections>
                         <action selector="pushhh:" destination="-1" eventType="touchUpInside" id="e9I-dd-h9Y"/>
                     </connections>
@@ -35,10 +41,12 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="1Ny-5x-ExB" firstAttribute="top" secondItem="1" secondAttribute="top" id="G23-33-py0"/>
-                <constraint firstAttribute="trailing" secondItem="1Ny-5x-ExB" secondAttribute="trailing" id="fRk-Fn-M2Z"/>
-                <constraint firstAttribute="bottom" secondItem="1Ny-5x-ExB" secondAttribute="bottom" id="iuK-gc-SZZ"/>
-                <constraint firstItem="1Ny-5x-ExB" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="u55-vg-De0"/>
+                <constraint firstItem="8wM-Vv-TDe" firstAttribute="top" secondItem="1Ny-5x-ExB" secondAttribute="bottom" constant="8" symbolic="YES" id="DFM-UA-Bb9"/>
+                <constraint firstItem="1Ny-5x-ExB" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="JIu-g2-bFG"/>
+                <constraint firstAttribute="bottom" secondItem="8wM-Vv-TDe" secondAttribute="bottom" constant="10" id="JoW-1t-CQE"/>
+                <constraint firstItem="8wM-Vv-TDe" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="137" id="Pt6-Ka-KyU"/>
+                <constraint firstAttribute="trailing" secondItem="1Ny-5x-ExB" secondAttribute="trailing" id="VzE-2H-XvO"/>
+                <constraint firstItem="1Ny-5x-ExB" firstAttribute="top" secondItem="1" secondAttribute="top" id="pT2-M5-MI2"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="89" y="61"/>
