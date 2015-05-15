@@ -116,15 +116,20 @@
         if (_frontViewController == nil){
             _frontViewController = [[FrontViewController alloc] init];
         } else {
-            [self setUserKey:[_frontViewController getUserKey]];
+            if ([[self getUserKey] isEqual:nil])
+                [self setUserKey:[_frontViewController getUserKey]];
         }
         [_frontViewController setUserKey:[self getUserKey]];
         newFrontController = [[UINavigationController alloc] initWithRootViewController:_frontViewController];
     }
     else if (row == 1)
     {
+        if (_mapViewController == nil) {
             _mapViewController = [[MapViewController alloc] init];
-
+            [_mapViewController setUserKey:[self getUserKey]];
+        } else {
+            
+        }
         newFrontController = [[UINavigationController alloc] initWithRootViewController:_mapViewController];
     }
     

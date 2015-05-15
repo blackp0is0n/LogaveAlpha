@@ -13,11 +13,13 @@
 @property (strong,nonatomic)NSString* taskDescription;
 @property (strong,nonatomic)NSString* taskID;
 @property (strong,nonatomic)NSString* managerID;
+@property (strong,nonatomic)NSString* courierID;
 @property (strong,nonatomic)NSString* taskAddress;
 @property (strong,nonatomic)NSString* name;
 @property (strong,nonatomic)NSString* sname;
 @property (strong,nonatomic)NSString* phone;
 @property (strong,nonatomic)NSString* date;
+@property (strong,nonatomic)NSString* taskIsActive;
 
 
 

@@ -154,6 +154,7 @@
         NSLog(@"Key is:%@\nBurn MF",[self getUserKey]);
         NSString *answer = json[@"status_message"];
         NSString *task = json[@"data"][@"task"];
+        [self setUserKey:json[@"data"][@"key"]];
         if([answer isEqual:@"OK"]){
             [self setUserKey:json[@"data"][@"key"]];
             if (![task isEqual:@"No tasks"]) {
@@ -174,7 +175,6 @@
                     NSString *mySubtitle = [NSString stringWithFormat:@"%@\nTask date:%@",taskDescription,taskDate];
                     annotation.subtitle = mySubtitle;
                     [self.mapView addAnnotation:annotation];
-                    i++;
                 }
             } else {
                 UIAlertView *errorAlert = [[UIAlertView alloc]

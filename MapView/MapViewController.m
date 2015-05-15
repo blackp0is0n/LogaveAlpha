@@ -5,12 +5,16 @@
 #import "DetailTaskController.h"
 @implementation MapViewController
 
+int activeTasks = 0;
+int nonActiveTaks = 0;
+
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
 {
+    _tasksArray = [[NSMutableArray alloc] init];
 	[super viewDidLoad];
-	_presentData = [[NSDate alloc] init];
+	_presentDate = [[NSDate alloc] init];
 	self.title = NSLocalizedString(@"Tasks", nil);
     
     SWRevealViewController *revealController = [self revealViewController];
@@ -28,12 +32,112 @@
     
     NSDateFormatter *titleFormat = [[NSDateFormatter alloc] init];
     [titleFormat setDateFormat:@"d MMMM, yyyy"];
-    NSString *titleDate = [titleFormat stringFromDate:_presentData];
+    NSString *titleDate = [titleFormat stringFromDate:_presentDate];
     
     
     self.title = NSLocalizedString(titleDate, nil);
 }
 
+
+-(void)createTasksConnection:(NSString*)date key:(NSString*)key{
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL
+                                                                        URLWithString:@"http://api.logave.com/task/gettask?"]
+                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:15.0];
+    request.HTTPMethod = @"POST";
+    NSString * param = [NSString stringWithFormat:@"key=%@&date=%@",key,date];
+    request.HTTPBody = [param dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    
+    if(!connection){
+        UIAlertView *errorAlert = [[UIAlertView alloc]
+                                   initWithTitle:@"Connection Error" message:@"Server not available now." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [errorAlert show];
+    } else {
+        _receivedData = [[NSMutableData data] init];
+    }
+}
+
+
+-(void)setUserKey:(NSString *)userKey{
+    _userKey = userKey;
+}
+-(NSString*)getUserKey{
+    return _userKey;
+}
+
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+{
+    [_receivedData setLength:0];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+{
+    
+    [_receivedData appendData:data];
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+    UIAlertView *errorAlert = [[UIAlertView alloc]
+                               initWithTitle:@"Error" message:@"Please, check your Internet Connection." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [errorAlert show];
+}
+
+
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    if (_receivedData!=nil) {
+        NSError *e = nil;
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:_receivedData options:NSJSONReadingMutableContainers error:&e];
+        NSLog(@"%@",json);
+        NSLog(@"Key is:%@\nBurn MF",[self getUserKey]);
+        NSString *answer = json[@"status_message"];
+        NSString *task = json[@"data"][@"task"];
+        [self setUserKey:json[@"data"][@"key"]];
+        if([answer isEqual:@"OK"]){
+            [self setUserKey:json[@"data"][@"key"]];
+            if (![task isEqual:@"No tasks"]) {
+                int i = 0;
+                for(i = 0;i<[json[@"data"][@"task"] count];i++){
+                    NSString *tID = json[@"data"][@"task"][i][@"id"];
+                    NSString *mID = json[@"data"][@"task"][i][@"manager_id"];
+                    NSString *courID = json[@"data"][@"task"][i][@"courier_id"];
+                    NSString *getName = json[@"data"][@"task"][i][@"name"];
+                    NSString *getSName = json[@"data"][@"task"][i][@"sname"];
+                    NSString *getPhone = json[@"data"][@"task"][i][@"phone"];
+                    NSString *tIsActive = json[@"data"][@"task"][i][@"active"];
+                    NSString *address = json[@"data"][@"task"][i][@"address"];
+                    NSString *taskDescription = json[@"data"][@"task"][i][@"description"];
+                    NSString *taskDate = json[@"data"][@"task"][i][@"date"];
+                    Task *myTask = [[Task alloc] init];
+                    myTask.taskID = tID;
+                    myTask.managerID = mID;
+                    myTask.taskDescription = taskDescription;
+                    myTask.taskAddress = address;
+                    myTask.courierID = courID;
+                    myTask.name = getName;
+                    myTask.sname = getSName;
+                    myTask.phone = getPhone;
+                    if([tIsActive isEqualToString:@"1"]){
+                        myTask.taskIsActive = @"YES";
+                        activeTasks++;
+                    } else {
+                        myTask.taskIsActive = @"NO";
+                        nonActiveTaks++;
+                    }
+                    myTask.date = taskDate;
+                    [_tasksArray addObject:myTask];
+                }
+            } else {
+                UIAlertView *errorAlert = [[UIAlertView alloc]
+                                           initWithTitle:@"Congratulations" message:@"You have no tasks to selected day." delegate:nil  cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                [errorAlert show];
+            }
+        }
+    }
+    
+}
 
 
 -(void)rightButtonPressed:(id) sender{
@@ -45,12 +149,12 @@
         self.title = NSLocalizedString(selectedDate, nil);
         
         NSLog(@"Successfully selected date: %@", date);
-        _presentData  = date;
+        _presentDate  = date;
     }];
     myDatePicker.titleLabel.text = @"Date picker.\n\nPlease choose a date and press 'Select' or 'Cancel'.";
     
     myDatePicker.datePicker.datePickerMode = UIDatePickerModeDate;
-    myDatePicker.datePicker.date = _presentData;
+    myDatePicker.datePicker.date = _presentDate;
     
     myDatePicker.disableBouncingWhenShowing = true;
     myDatePicker.disableMotionEffects = false;
@@ -68,7 +172,11 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:
 (NSInteger)section{
-    return [myData count]/2;
+    if(section == 0){
+        return activeTasks;
+    } else {
+        return nonActiveTaks;
+    }
 }
 
 
@@ -90,8 +198,7 @@
     if (indexPath.section == 0) {
         stringForCell= [myData objectAtIndex:indexPath.row];
         
-    }
-    else if (indexPath.section == 1){
+    } else if (indexPath.section == 1){
         stringForCell= [myData objectAtIndex:indexPath.row+ [myData count]/2];
         
     }
@@ -108,10 +215,10 @@
 (NSInteger)section{
     NSString *headerTitle;
     if (section==0) {
-        headerTitle = @"Section 1 Header";
+        headerTitle = @"Active tasks";
     }
     else{
-        headerTitle = @"Section 2 Header";
+        headerTitle = @"Non-active Tasks";
         
     }
     return headerTitle;
