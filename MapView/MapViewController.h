@@ -12,6 +12,8 @@
 @property (strong,nonatomic) NSDate *presentDate;
 @property (strong,nonatomic)NSMutableData *receivedData;
 @property(nonatomic,strong)NSString *userKey;
-@property(nonatomic,strong)NSMutableArray *tasksArray;
+@property(nonatomic,strong)NSMutableArray *activeTasksArray;
+@property(nonatomic,strong)NSMutableArray *nonActiveTasksArray;
 
+-(void)setAnnotationsToDate:(NSDate*)date;
 @end

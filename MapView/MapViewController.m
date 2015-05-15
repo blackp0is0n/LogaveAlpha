@@ -5,14 +5,13 @@
 #import "DetailTaskController.h"
 @implementation MapViewController
 
-int activeTasks = 0;
-int nonActiveTaks = 0;
 
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
 {
-    _tasksArray = [[NSMutableArray alloc] init];
+    _activeTasksArray = [[NSMutableArray alloc] init];
+    _nonActiveTasksArray = [[NSMutableArray alloc] init];
 	[super viewDidLoad];
 	_presentDate = [[NSDate alloc] init];
 	self.title = NSLocalizedString(@"Tasks", nil);
@@ -33,7 +32,7 @@ int nonActiveTaks = 0;
     NSDateFormatter *titleFormat = [[NSDateFormatter alloc] init];
     [titleFormat setDateFormat:@"d MMMM, yyyy"];
     NSString *titleDate = [titleFormat stringFromDate:_presentDate];
-    
+    [self setAnnotationsToDate:_presentDate];
     
     self.title = NSLocalizedString(titleDate, nil);
 }
@@ -93,13 +92,14 @@ int nonActiveTaks = 0;
         NSLog(@"%@",json);
         NSLog(@"Key is:%@\nBurn MF",[self getUserKey]);
         NSString *answer = json[@"status_message"];
+        [_activeTasksArray removeAllObjects];
+        [_nonActiveTasksArray removeAllObjects];
         NSString *task = json[@"data"][@"task"];
         [self setUserKey:json[@"data"][@"key"]];
         if([answer isEqual:@"OK"]){
             [self setUserKey:json[@"data"][@"key"]];
             if (![task isEqual:@"No tasks"]) {
-                int i = 0;
-                for(i = 0;i<[json[@"data"][@"task"] count];i++){
+                for(int i = 0;i<[json[@"data"][@"task"] count];i++){
                     NSString *tID = json[@"data"][@"task"][i][@"id"];
                     NSString *mID = json[@"data"][@"task"][i][@"manager_id"];
                     NSString *courID = json[@"data"][@"task"][i][@"courier_id"];
@@ -121,24 +121,44 @@ int nonActiveTaks = 0;
                     myTask.phone = getPhone;
                     if([tIsActive isEqualToString:@"1"]){
                         myTask.taskIsActive = @"YES";
-                        activeTasks++;
                     } else {
                         myTask.taskIsActive = @"NO";
-                        nonActiveTaks++;
                     }
                     myTask.date = taskDate;
-                    [_tasksArray addObject:myTask];
+                    if ([myTask.taskIsActive isEqualToString:@"YES"]) {
+                        [_activeTasksArray addObject:myTask];
+                    } else {
+                        [_nonActiveTasksArray addObject:myTask];
+                    }
                 }
             } else {
                 UIAlertView *errorAlert = [[UIAlertView alloc]
                                            initWithTitle:@"Congratulations" message:@"You have no tasks to selected day." delegate:nil  cancelButtonTitle:@"OK" otherButtonTitles:nil];
                 [errorAlert show];
+                [_activeTasksArray removeAllObjects];
+                [_nonActiveTasksArray removeAllObjects];
             }
+            NSRange range = NSMakeRange(0, [self numberOfSectionsInTableView:self.myTableView]);
+            NSIndexSet *sections = [NSIndexSet indexSetWithIndexesInRange:range];
+            [self.myTableView reloadSections:sections withRowAnimation:UITableViewRowAnimationAutomatic];
         }
     }
     
 }
 
+
+-(void)setAnnotationsToDate:(NSDate*)date{
+    NSDateFormatter *format = [[NSDateFormatter alloc] init];
+    [format setDateFormat:@"yyyy-MM-dd"];
+    
+    NSDateFormatter *titleFormat = [[NSDateFormatter alloc] init];
+    [titleFormat setDateFormat:@"d MMMM, yyyy"];
+    NSString *titleDate = [titleFormat stringFromDate:date];
+    
+    NSString *selectedDate = [format stringFromDate:date];
+    self.title = NSLocalizedString(titleDate, nil);
+    [self createTasksConnection:selectedDate key:[self getUserKey]];
+}
 
 -(void)rightButtonPressed:(id) sender{
     RMDateSelectionViewController *myDatePicker = [RMDateSelectionViewController dateSelectionController];
@@ -150,6 +170,7 @@ int nonActiveTaks = 0;
         
         NSLog(@"Successfully selected date: %@", date);
         _presentDate  = date;
+        [self setAnnotationsToDate:_presentDate];
     }];
     myDatePicker.titleLabel.text = @"Date picker.\n\nPlease choose a date and press 'Select' or 'Cancel'.";
     
@@ -173,9 +194,9 @@ int nonActiveTaks = 0;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:
 (NSInteger)section{
     if(section == 0){
-        return activeTasks;
+        return _activeTasksArray.count;
     } else {
-        return nonActiveTaks;
+        return _nonActiveTasksArray.count;
     }
 }
 
@@ -196,10 +217,14 @@ int nonActiveTaks = 0;
     }
     NSString *stringForCell;
     if (indexPath.section == 0) {
-        stringForCell= [myData objectAtIndex:indexPath.row];
+        Task *myTask= [_activeTasksArray objectAtIndex:indexPath.row];
+        NSString *titleForTaskRow = [@"tID:" stringByAppendingString:myTask.taskID];
+        stringForCell = titleForTaskRow;
         
     } else if (indexPath.section == 1){
-        stringForCell= [myData objectAtIndex:indexPath.row+ [myData count]/2];
+        Task *myTask= [_nonActiveTasksArray objectAtIndex:indexPath.row];
+        NSString *titleForTaskRow = [@"tID:" stringByAppendingString:myTask.taskID];
+        stringForCell = titleForTaskRow;
         
     }
     [cell.textLabel setText:stringForCell];
