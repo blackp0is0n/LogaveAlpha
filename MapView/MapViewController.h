@@ -8,7 +8,6 @@
 }
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
 
-- (IBAction)pushhh:(UIButton *)sender;
 @property (strong,nonatomic) NSDate *presentDate;
 @property (strong,nonatomic)NSMutableData *receivedData;
 @property(nonatomic,strong)NSString *userKey;
