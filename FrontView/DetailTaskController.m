@@ -36,7 +36,11 @@
     textForView = [textForView stringByAppendingString:@"Reciever's phone:"];
     textForView = [textForView stringByAppendingString:self.presentTask.phone];
     textForView = [textForView stringByAppendingString:@"\n\n"];
-    textForView = [textForView stringByAppendingString:@"This task is active"];
+    if([self.presentTask.taskIsActive isEqualToString:@"YES"]){
+        textForView = [textForView stringByAppendingString:@"This task is active"];
+    } else {
+        textForView = [textForView stringByAppendingString:@"This task is not active"];
+    }
     [self.textView setText:textForView];
 }
 
@@ -55,7 +59,51 @@
 }
 */
 
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+{
+    [_receivedData setLength:0];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+{
+    
+    [_receivedData appendData:data];
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+    UIAlertView *errorAlert = [[UIAlertView alloc]
+                               initWithTitle:@"Error" message:@"Please, check your Internet Connection." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [errorAlert show];
+}
+
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:_receivedData options:NSJSONReadingMutableContainers error:nil];
+    NSString *myStatus = json[@"data"][@"data"];
+    NSLog(@"%@",json);
+    if ([myStatus isEqual:@"status changed"]) {
+        [self.controller createTasksConnection:self.presentTask.date key:self.presentTask.key];
+        [self.controller updateSections];
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
+
+}
+
+
 - (IBAction)CompletePressed:(UIButton *)sender {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL
+                                                                        URLWithString:@"http://api.logave.com/task/changetask?"]
+                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:15.0];
+    request.HTTPMethod = @"POST";
+    NSString * param = [NSString stringWithFormat:@"key=%@&task=%@&status=0", self.presentTask.key,self.presentTask.taskID];
+    request.HTTPBody = [param dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    
+    
+    if (connection)
+        _receivedData = [[NSMutableData data] init];
+    //[self.navigationController popToRootViewControllerAnimated:YES];
 }
 @end

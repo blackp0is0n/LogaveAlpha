@@ -20,7 +20,7 @@
 @property (strong,nonatomic)NSString* phone;
 @property (strong,nonatomic)NSString* date;
 @property (strong,nonatomic)NSString* taskIsActive;
-
+@property (strong,nonatomic)NSString *key;
 
 
 @end

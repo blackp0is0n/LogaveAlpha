@@ -119,6 +119,7 @@
                     myTask.name = getName;
                     myTask.sname = getSName;
                     myTask.phone = getPhone;
+                    myTask.key = [self getUserKey];
                     if([tIsActive isEqualToString:@"1"]){
                         myTask.taskIsActive = @"YES";
                     } else {
@@ -138,15 +139,17 @@
                 [_activeTasksArray removeAllObjects];
                 [_nonActiveTasksArray removeAllObjects];
             }
-            NSRange range = NSMakeRange(0, [self numberOfSectionsInTableView:self.myTableView]);
-            NSIndexSet *sections = [NSIndexSet indexSetWithIndexesInRange:range];
-            [self.myTableView reloadSections:sections withRowAnimation:UITableViewRowAnimationAutomatic];
+            [self updateSections];
         }
     }
     
 }
 
-
+-(void) updateSections {
+    NSRange range = NSMakeRange(0, [self numberOfSectionsInTableView:self.myTableView]);
+    NSIndexSet *sections = [NSIndexSet indexSetWithIndexesInRange:range];
+    [self.myTableView reloadSections:sections withRowAnimation:UITableViewRowAnimationAutomatic];
+}
 -(void)setAnnotationsToDate:(NSDate*)date{
     NSDateFormatter *format = [[NSDateFormatter alloc] init];
     [format setDateFormat:@"yyyy-MM-dd"];
@@ -218,7 +221,7 @@
     NSString *stringForCell;
     if (indexPath.section == 0) {
         Task *myTask= [_activeTasksArray objectAtIndex:indexPath.row];
-        NSString *titleForTaskRow =  [[@"tID:" stringByAppendingString:myTask.taskID] stringByAppendingString:myTask.taskDescription];
+        NSString *titleForTaskRow = [[[@"tID:" stringByAppendingString:myTask.taskID] stringByAppendingString:@" "]stringByAppendingString:myTask.taskDescription];
         stringForCell = titleForTaskRow;
         
     } else if (indexPath.section == 1){
@@ -263,6 +266,7 @@
     NSLog(@"Section:%ld Row:%ld selected and its data is %@",
           (long)indexPath.section,(long)indexPath.row,cell.textLabel.text);
     DetailTaskController *stubController = [[DetailTaskController alloc] init];
+    stubController.controller = self;
     if(indexPath.section == 0){
         stubController.presentTask = [_activeTasksArray objectAtIndex:indexPath.row];
     } else {

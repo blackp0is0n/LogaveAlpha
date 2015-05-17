@@ -16,4 +16,6 @@
 @property(nonatomic,strong)NSMutableArray *nonActiveTasksArray;
 
 -(void)setAnnotationsToDate:(NSDate*)date;
+-(void)updateSections;
+-(void)createTasksConnection:(NSString*)date key:(NSString*)key;
 @end
