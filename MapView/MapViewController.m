@@ -26,7 +26,7 @@
 
     
     
-    UIBarButtonItem * topRightButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(rightButtonPressed:)];
+    UIBarButtonItem * topRightButton = [[UIBarButtonItem alloc] initWithTitle:@"Date" style:UIBarButtonItemStyleDone target:self action:@selector(rightButtonPressed:)];
     self.navigationItem.rightBarButtonItem = topRightButton;
     
     NSDateFormatter *titleFormat = [[NSDateFormatter alloc] init];
@@ -218,12 +218,12 @@
     NSString *stringForCell;
     if (indexPath.section == 0) {
         Task *myTask= [_activeTasksArray objectAtIndex:indexPath.row];
-        NSString *titleForTaskRow = [@"tID:" stringByAppendingString:myTask.taskID];
+        NSString *titleForTaskRow =  [[@"tID:" stringByAppendingString:myTask.taskID] stringByAppendingString:myTask.taskDescription];
         stringForCell = titleForTaskRow;
         
     } else if (indexPath.section == 1){
         Task *myTask= [_nonActiveTasksArray objectAtIndex:indexPath.row];
-        NSString *titleForTaskRow = [@"tID:" stringByAppendingString:myTask.taskID];
+        NSString *titleForTaskRow = [[[@"tID:" stringByAppendingString:myTask.taskID] stringByAppendingString:@" "]stringByAppendingString:myTask.taskDescription];
         stringForCell = titleForTaskRow;
         
     }
@@ -263,6 +263,11 @@
     NSLog(@"Section:%ld Row:%ld selected and its data is %@",
           (long)indexPath.section,(long)indexPath.row,cell.textLabel.text);
     DetailTaskController *stubController = [[DetailTaskController alloc] init];
+    if(indexPath.section == 0){
+        stubController.presentTask = [_activeTasksArray objectAtIndex:indexPath.row];
+    } else {
+        stubController.presentTask = [_nonActiveTasksArray objectAtIndex:indexPath.row];
+    }
     stubController.title = @"Task details";
     stubController.view.backgroundColor = [UIColor whiteColor];
     [self.navigationController pushViewController:stubController animated:YES];

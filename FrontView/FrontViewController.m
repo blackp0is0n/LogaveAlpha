@@ -31,7 +31,7 @@
     
     self.navigationItem.leftBarButtonItem = revealButtonItem;
     
-    UIBarButtonItem * topRightButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(rightButtonPressed:)];
+    UIBarButtonItem * topRightButton = [[UIBarButtonItem alloc] initWithTitle:@"Date" style:UIBarButtonItemStyleDone target:self action:@selector(rightButtonPressed:)];
     self.navigationItem.rightBarButtonItem = topRightButton;
 
     [_mapView removeAnnotations:_mapView.annotations];

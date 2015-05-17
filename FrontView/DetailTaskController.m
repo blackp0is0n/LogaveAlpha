@@ -18,6 +18,26 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.title =[@"Task ID:" stringByAppendingString:self.presentTask.taskID];
+    NSString *textForView = [[NSString alloc] init];
+    textForView = [[@"Task description:" stringByAppendingString:self.presentTask.taskDescription] stringByAppendingString:@"\n\n"];
+    textForView = [textForView stringByAppendingString:@"Manager ID:"];
+    textForView = [textForView stringByAppendingString:self.presentTask.managerID];
+    textForView = [textForView stringByAppendingString:@"\n\n"];
+    textForView = [textForView stringByAppendingString:@"Task Address:"];
+    textForView = [textForView stringByAppendingString:self.presentTask.taskAddress];
+    textForView = [textForView stringByAppendingString:@"\n\n"];
+    textForView = [textForView stringByAppendingString:@"Reciever's name:"];
+    textForView = [textForView stringByAppendingString:self.presentTask.name];
+    textForView = [textForView stringByAppendingString:@"\n\n"];
+    textForView = [textForView stringByAppendingString:@"Reciever's Surname:"];
+    textForView = [textForView stringByAppendingString:self.presentTask.sname];
+    textForView = [textForView stringByAppendingString:@"\n\n"];
+    textForView = [textForView stringByAppendingString:@"Reciever's phone:"];
+    textForView = [textForView stringByAppendingString:self.presentTask.phone];
+    textForView = [textForView stringByAppendingString:@"\n\n"];
+    textForView = [textForView stringByAppendingString:@"This task is active"];
+    [self.textView setText:textForView];
 }
 
 - (void)didReceiveMemoryWarning {
