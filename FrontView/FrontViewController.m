@@ -179,7 +179,7 @@
             } else {
                 UIAlertView *errorAlert = [[UIAlertView alloc]
                                            initWithTitle:@"Congratulations" message:@"You have no tasks to selected day." delegate:nil  cancelButtonTitle:@"OK" otherButtonTitles:nil];
-                [errorAlert show];
+                //[errorAlert show];
             }
         }
     }

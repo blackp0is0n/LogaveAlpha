@@ -97,7 +97,7 @@
                                                                         URLWithString:@"http://api.logave.com/task/changetask?"]
                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:15.0];
     request.HTTPMethod = @"POST";
-    NSString * param = [NSString stringWithFormat:@"key=%@&task=%@&status=1", self.presentTask.key,self.presentTask.taskID];
+    NSString * param = [NSString stringWithFormat:@"key=%@&task=%@&status=0", self.presentTask.key,self.presentTask.taskID];
     request.HTTPBody = [param dataUsingEncoding:NSUTF8StringEncoding];
     
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];

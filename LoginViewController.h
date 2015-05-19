@@ -22,7 +22,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *passField;
 - (IBAction)loginKeyboardHiding:(UITextField *)sender;
 - (IBAction)passwordKeyboardHiding:(UITextField *)sender;
-@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activity;
+
 
 - (IBAction)loginTouchedUp:(UIButton *)sender;
 

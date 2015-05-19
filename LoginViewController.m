@@ -74,11 +74,11 @@
     
     
     if (connection) {
-        [_activity startAnimating];
         _receivedData = [[NSMutableData data] init];
     }
-    
-
+    [self.loginField setHidden:YES];
+    [self.passField setHidden:YES];
+    [self.loginPressed setHidden:YES];
 }
 
 
@@ -104,10 +104,12 @@
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    [_activity stopAnimating];
     UIAlertView *errorAlert = [[UIAlertView alloc]
                                initWithTitle:@"Error" message:@"Please, check your Internet Connection." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [errorAlert show];
+    [self.loginField setHidden:NO];
+    [self.passField setHidden:NO];
+    [self.loginPressed setHidden:NO];
 }
 
 
@@ -132,6 +134,9 @@
         UIAlertView *errorAlert = [[UIAlertView alloc]
                                    initWithTitle:@"Authorization Error" message:@"Please, check your login and password." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [errorAlert show];
+        [self.loginField setHidden:NO];
+        [self.passField setHidden:NO];
+        [self.loginPressed setHidden:NO];
     } else {
         NSLog(@"%@",json);
         NSString *key = json[@"data"][@"data"][@"user"][@"key"];
@@ -162,7 +167,6 @@
     //NSString *
     //int a = [status intValue];
     //NSLog(@"\nValue is:%d!",a);
-    [_activity stopAnimating];
 }
 
 @end

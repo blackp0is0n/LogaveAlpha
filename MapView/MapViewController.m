@@ -96,9 +96,18 @@
         [_nonActiveTasksArray removeAllObjects];
         NSString *task = json[@"data"][@"task"];
         [self setUserKey:json[@"data"][@"key"]];
+        if (self.noTasksLabel == nil){
+            self.noTasksLabel = [[UILabel alloc] init];
+            [self.noTasksLabel setText:@"No tasks for this Day"];
+            [self.noTasksLabel setTextColor:[UIColor grayColor]];
+            self.noTasksLabel.frame = CGRectMake(self.view.frame.size.width/2-80, 70.0f, 160.0f, 30.0f);
+            [self.view addSubview:self.noTasksLabel];
+        }
         if([answer isEqual:@"OK"]){
             [self setUserKey:json[@"data"][@"key"]];
             if (![task isEqual:@"No tasks"]) {
+                [self.noTasksLabel setHidden:YES];
+                [self.myTableView setHidden:NO];
                 for(int i = 0;i<[json[@"data"][@"task"] count];i++){
                     NSString *tID = json[@"data"][@"task"][i][@"id"];
                     NSString *mID = json[@"data"][@"task"][i][@"manager_id"];
@@ -133,11 +142,10 @@
                     }
                 }
             } else {
-                UIAlertView *errorAlert = [[UIAlertView alloc]
-                                           initWithTitle:@"Congratulations" message:@"You have no tasks to selected day." delegate:nil  cancelButtonTitle:@"OK" otherButtonTitles:nil];
-                [errorAlert show];
                 [_activeTasksArray removeAllObjects];
                 [_nonActiveTasksArray removeAllObjects];
+                [self.myTableView setHidden:YES];
+                [self.noTasksLabel setHidden:NO];
             }
             [self updateSections];
         }
@@ -222,40 +230,41 @@
     }
     NSString *stringForCell;
     NSString *detailText;
+    UILabel *addFriendButton = [[UILabel alloc] init];
+    
+    addFriendButton.frame = CGRectMake(150.0f, 5.0f, 130.0f, 30.0f);
+    [cell addSubview:addFriendButton];
     if (indexPath.section == 0) {
         Task *myTask= [_activeTasksArray objectAtIndex:indexPath.row];
         NSString *titleForTaskRow = myTask.taskDescription;
         stringForCell = titleForTaskRow;
+        [addFriendButton setText:@"Not completed"];
+        [addFriendButton setTextColor:[UIColor redColor]];
         detailText = [@"Task id:" stringByAppendingString:myTask.taskID];
     } else if (indexPath.section == 1){
         Task *myTask= [_nonActiveTasksArray objectAtIndex:indexPath.row];
         NSString *titleForTaskRow = myTask.taskDescription;
         stringForCell = titleForTaskRow;
+        [addFriendButton setText:@"Completed"];
+        [addFriendButton setTextColor:[UIColor greenColor]];
         detailText = [@"Task id:" stringByAppendingString:myTask.taskID];
     }
+    
+
     [cell.textLabel setText:stringForCell];
     [cell.detailTextLabel setTextColor:[UIColor grayColor]];
     [cell.detailTextLabel setText:detailText];
     return cell;
 }
 
+
+
 // Default is 1 if not implemented
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 2;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:
-(NSInteger)section{
-    NSString *headerTitle;
-    if (section==0) {
-        headerTitle = @"Active tasks";
-    }
-    else{
-        headerTitle = @"Non-active Tasks";
-        
-    }
-    return headerTitle;
-}
+
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:
 (NSInteger)section{
 

@@ -7,7 +7,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController">
             <connections>
-                <outlet property="activity" destination="3KU-25-sxA" id="3py-2y-qBJ"/>
                 <outlet property="loginField" destination="2fa-sP-DUm" id="5cg-aP-fZL"/>
                 <outlet property="loginPressed" destination="A4i-qX-MDD" id="0gJ-g4-RSD"/>
                 <outlet property="passField" destination="Bd7-k6-TXE" id="uzc-fM-4sd"/>
@@ -28,9 +27,6 @@
                         <action selector="loginTouchedUp:" destination="-1" eventType="touchUpInside" id="846-mT-Ed0"/>
                     </connections>
                 </button>
-                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="3KU-25-sxA">
-                    <rect key="frame" x="290" y="315" width="20" height="20"/>
-                </activityIndicatorView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="logave.png" translatesAutoresizingMaskIntoConstraints="NO" id="EPg-1L-xbh">
                     <rect key="frame" x="180" y="136" width="240" height="128"/>
                 </imageView>
@@ -59,7 +55,6 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="Bd7-k6-TXE" firstAttribute="top" secondItem="3KU-25-sxA" secondAttribute="bottom" constant="8" symbolic="YES" id="4q1-jm-fHD"/>
                 <constraint firstItem="Bd7-k6-TXE" firstAttribute="trailing" secondItem="i5M-Pr-FkT" secondAttribute="trailingMargin" id="7Ld-hU-zsO"/>
                 <constraint firstItem="Bd7-k6-TXE" firstAttribute="top" secondItem="2fa-sP-DUm" secondAttribute="bottom" constant="27" id="7v0-Gv-Fmr"/>
                 <constraint firstAttribute="centerY" secondItem="Bd7-k6-TXE" secondAttribute="centerY" constant="-40" id="CVv-dg-XG8"/>
@@ -72,24 +67,19 @@
                 <constraint firstAttribute="centerY" secondItem="2fa-sP-DUm" secondAttribute="centerY" id="ijj-fE-VYs"/>
                 <constraint firstAttribute="centerX" secondItem="2fa-sP-DUm" secondAttribute="centerX" id="ixO-lU-xmy"/>
                 <constraint firstItem="2fa-sP-DUm" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="11" id="ofx-yG-Ylf"/>
-                <constraint firstItem="2fa-sP-DUm" firstAttribute="centerX" secondItem="3KU-25-sxA" secondAttribute="centerX" id="pso-Yk-MTH"/>
                 <constraint firstAttribute="centerY" secondItem="EPg-1L-xbh" secondAttribute="centerY" constant="100" id="pzo-dB-QxY"/>
                 <constraint firstItem="A4i-qX-MDD" firstAttribute="trailing" secondItem="2fa-sP-DUm" secondAttribute="trailing" id="qQ1-7X-pHf"/>
                 <constraint firstAttribute="centerY" secondItem="A4i-qX-MDD" secondAttribute="centerY" constant="-80" id="qZ6-39-7FA"/>
-                <constraint firstItem="3KU-25-sxA" firstAttribute="centerX" secondItem="Bd7-k6-TXE" secondAttribute="centerX" id="u9N-lj-qSy"/>
             </constraints>
             <variation key="default">
                 <mask key="constraints">
                     <exclude reference="fds-v3-9Y9"/>
                     <exclude reference="gmb-AA-2Vl"/>
                     <exclude reference="ofx-yG-Ylf"/>
-                    <exclude reference="pso-Yk-MTH"/>
-                    <exclude reference="4q1-jm-fHD"/>
                     <exclude reference="7Ld-hU-zsO"/>
                     <exclude reference="7v0-Gv-Fmr"/>
                     <exclude reference="Om6-Dk-FHn"/>
                     <exclude reference="qQ1-7X-pHf"/>
-                    <exclude reference="u9N-lj-qSy"/>
                 </mask>
             </variation>
             <connections>

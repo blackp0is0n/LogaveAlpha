@@ -13,6 +13,7 @@
 @property(nonatomic,strong)NSString *userKey;
 @property(nonatomic,strong)NSMutableArray *activeTasksArray;
 @property(nonatomic,strong)NSMutableArray *nonActiveTasksArray;
+@property(nonatomic,strong)UILabel *noTasksLabel;
 
 -(void)setAnnotationsToDate:(NSDate*)date;
 -(void)updateSections;
