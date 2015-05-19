@@ -28,7 +28,7 @@
 {
     
 	[super viewDidLoad];
-    
+    [self.rearTableView setSeparatorColor:[UIColor whiteColor]];
     self.navigationItem.title = @"Logave";
 }
 

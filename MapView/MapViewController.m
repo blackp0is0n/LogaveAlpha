@@ -204,7 +204,9 @@
 }
 
 
-
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 55;
+}
 
 
 
@@ -216,21 +218,24 @@
                              cellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc]initWithStyle:
-                UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+                UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
     }
     NSString *stringForCell;
+    NSString *detailText;
     if (indexPath.section == 0) {
         Task *myTask= [_activeTasksArray objectAtIndex:indexPath.row];
-        NSString *titleForTaskRow = [[[@"tID:" stringByAppendingString:myTask.taskID] stringByAppendingString:@" "]stringByAppendingString:myTask.taskDescription];
+        NSString *titleForTaskRow = myTask.taskDescription;
         stringForCell = titleForTaskRow;
-        
+        detailText = [@"Task id:" stringByAppendingString:myTask.taskID];
     } else if (indexPath.section == 1){
         Task *myTask= [_nonActiveTasksArray objectAtIndex:indexPath.row];
-        NSString *titleForTaskRow = [[[@"tID:" stringByAppendingString:myTask.taskID] stringByAppendingString:@" "]stringByAppendingString:myTask.taskDescription];
+        NSString *titleForTaskRow = myTask.taskDescription;
         stringForCell = titleForTaskRow;
-        
+        detailText = [@"Task id:" stringByAppendingString:myTask.taskID];
     }
     [cell.textLabel setText:stringForCell];
+    [cell.detailTextLabel setTextColor:[UIColor grayColor]];
+    [cell.detailTextLabel setText:detailText];
     return cell;
 }
 
