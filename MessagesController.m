@@ -15,6 +15,8 @@
 
 @implementation MessagesController
 
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -44,14 +46,48 @@
     _searchBar.placeholder = @"Find this motherfucker";
     
     self.myTableView.tableHeaderView = _searchBar;
+    
+    [self createMessagesConnection:[self getUserKey]];
+    self.noTasksLabel = [[UILabel alloc] init];
+    [self.noTasksLabel setText:@"No tasks for this Day"];
+    [self.noTasksLabel setTextColor:[UIColor grayColor]];
+    self.noTasksLabel.frame = CGRectMake(self.view.frame.size.width/2-80, 70.0f, 160.0f, 30.0f);
+    //[self.view addSubview:self.noTasksLabel];
 }
 
--(void)createMessagesConnection:(NSString*)date key:(NSString*)key{
+-(void)setUserKey:(NSString *)userKey{
+    _userKey = userKey;
+}
+-(NSString*)getUserKey{
+    return _userKey;
+}
+
+
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+{
+    [_receivedData setLength:0];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+{
+    
+    [_receivedData appendData:data];
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+    UIAlertView *errorAlert = [[UIAlertView alloc]
+                               initWithTitle:@"Error" message:@"Please, check your Internet Connection." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [errorAlert show];
+}
+
+
+-(void)createMessagesConnection:(NSString*)key{
     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL
-                                                                        URLWithString:@"http://api.logave.com/mail/gettask?"]
+                                                                        URLWithString:@"http://api.logave.com/mail/getoutbox?"]
                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:15.0];
     request.HTTPMethod = @"POST";
-    NSString * param = [NSString stringWithFormat:@"key=%@&date=%@",key,date];
+    NSString * param = [NSString stringWithFormat:@"key=%@",key];
     request.HTTPBody = [param dataUsingEncoding:NSUTF8StringEncoding];
     
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
@@ -65,6 +101,75 @@
     }
 }
 
+-(void) updateSections {
+    //NSRange range = NSMakeRange(0, [self numberOfSectionsInTableView:self.myTableView]);
+    ///NSIndexSet *sections = [NSIndexSet indexSetWithIndexesInRange:range];
+    //[self.myTableView reloadSections:sections withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:_receivedData options:NSJSONReadingMutableContainers error:nil];
+    NSLog(@"%@",json);
+    
+    /*if (_receivedData!=nil) {
+        NSError *e = nil;
+
+        NSLog(@"Key is:%@\nBurn MF",[self getUserKey]);
+        NSString *answer = json[@"status_message"];
+        [_activeTasksArray removeAllObjects];
+        [_nonActiveTasksArray removeAllObjects];
+        NSString *task = json[@"data"][@"task"];
+        [self setUserKey:json[@"data"][@"key"]];
+        
+        if([answer isEqual:@"OK"]){
+            [self setUserKey:json[@"data"][@"key"]];
+            if (![task isEqual:@"No tasks"]) {
+                [self.noTasksLabel setHidden:YES];
+                [self.myTableView setHidden:NO];
+                for(int i = 0;i<[json[@"data"][@"task"] count];i++){
+                    NSString *tID = json[@"data"][@"task"][i][@"id"];
+                    NSString *mID = json[@"data"][@"task"][i][@"manager_id"];
+                    NSString *courID = json[@"data"][@"task"][i][@"courier_id"];
+                    NSString *getName = json[@"data"][@"task"][i][@"name"];
+                    NSString *getSName = json[@"data"][@"task"][i][@"sname"];
+                    NSString *getPhone = json[@"data"][@"task"][i][@"phone"];
+                    NSString *tIsActive = json[@"data"][@"task"][i][@"active"];
+                    NSString *address = json[@"data"][@"task"][i][@"address"];
+                    NSString *taskDescription = json[@"data"][@"task"][i][@"description"];
+                    NSString *taskDate = json[@"data"][@"task"][i][@"date"];
+                    Task *myTask = [[Task alloc] init];
+                    myTask.taskID = tID;
+                    myTask.managerID = mID;
+                    myTask.taskDescription = taskDescription;
+                    myTask.taskAddress = address;
+                    myTask.courierID = courID;
+                    myTask.name = getName;
+                    myTask.sname = getSName;
+                    myTask.phone = getPhone;
+                    myTask.key = [self getUserKey];
+                    if([tIsActive isEqualToString:@"1"]){
+                        myTask.taskIsActive = @"YES";
+                    } else {
+                        myTask.taskIsActive = @"NO";
+                    }
+                    myTask.date = taskDate;
+                    if ([myTask.taskIsActive isEqualToString:@"YES"]) {
+                        [_activeTasksArray addObject:myTask];
+                    } else {
+                        [_nonActiveTasksArray addObject:myTask];
+                    }
+                }
+            } else {
+                [_activeTasksArray removeAllObjects];
+                [_nonActiveTasksArray removeAllObjects];
+                [self.myTableView setHidden:YES];
+                [self.noTasksLabel setHidden:NO];
+            }
+            [self updateSections];
+        }
+    }*/
+    
+}
 
 - (void) dismissKeyboard
 {

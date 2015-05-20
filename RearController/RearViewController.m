@@ -135,8 +135,10 @@
     
     else if ( row == 2 )
     {
-        if(_messagesController == nil)
+        if(_messagesController == nil){
             _messagesController = [[MessagesController alloc] init];
+            [_messagesController setUserKey:[self getUserKey]];
+        }
         newFrontController = [[UINavigationController alloc] initWithRootViewController:_messagesController];
     }
     else if( row == 3){
