@@ -35,6 +35,14 @@
     [self setAnnotationsToDate:_presentDate];
     
     self.title = NSLocalizedString(titleDate, nil);
+    
+    if (self.noTasksLabel == nil){
+        self.noTasksLabel = [[UILabel alloc] init];
+        [self.noTasksLabel setText:@"No tasks for this Day"];
+        [self.noTasksLabel setTextColor:[UIColor grayColor]];
+        self.noTasksLabel.frame = CGRectMake(self.view.frame.size.width/2-80, 70.0f, 160.0f, 30.0f);
+        [self.view addSubview:self.noTasksLabel];
+    }
 }
 
 
@@ -96,13 +104,7 @@
         [_nonActiveTasksArray removeAllObjects];
         NSString *task = json[@"data"][@"task"];
         [self setUserKey:json[@"data"][@"key"]];
-        if (self.noTasksLabel == nil){
-            self.noTasksLabel = [[UILabel alloc] init];
-            [self.noTasksLabel setText:@"No tasks for this Day"];
-            [self.noTasksLabel setTextColor:[UIColor grayColor]];
-            self.noTasksLabel.frame = CGRectMake(self.view.frame.size.width/2-80, 70.0f, 160.0f, 30.0f);
-            [self.view addSubview:self.noTasksLabel];
-        }
+
         if([answer isEqual:@"OK"]){
             [self setUserKey:json[@"data"][@"key"]];
             if (![task isEqual:@"No tasks"]) {
