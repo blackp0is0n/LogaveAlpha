@@ -48,10 +48,6 @@
     self.myTableView.tableHeaderView = _searchBar;
     
     [self createMessagesConnection:[self getUserKey]];
-    self.noTasksLabel = [[UILabel alloc] init];
-    [self.noTasksLabel setText:@"No tasks for this Day"];
-    [self.noTasksLabel setTextColor:[UIColor grayColor]];
-    self.noTasksLabel.frame = CGRectMake(self.view.frame.size.width/2-80, 70.0f, 160.0f, 30.0f);
     //[self.view addSubview:self.noTasksLabel];
 }
 
@@ -84,7 +80,7 @@
 
 -(void)createMessagesConnection:(NSString*)key{
     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL
-                                                                        URLWithString:@"http://api.logave.com/mail/getoutbox?"]
+                                                                        URLWithString:@"http://api.logave.com/mail/getinbox?"]
                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:15.0];
     request.HTTPMethod = @"POST";
     NSString * param = [NSString stringWithFormat:@"key=%@",key];
@@ -110,7 +106,6 @@
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:_receivedData options:NSJSONReadingMutableContainers error:nil];
     NSLog(@"%@",json);
-    
     /*if (_receivedData!=nil) {
         NSError *e = nil;
 
@@ -184,9 +179,72 @@
 
 -(void)refreshTable{
     [_refreshControl endRefreshing];
+    [self updateSections];
     [self.myTableView reloadData];
+    
+}
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 2;
 }
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:
+(NSInteger)section{
+    if (section == 0) {
+        return 1;
+    } else {
+        return 10;
+    }
+}
+
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 55;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:
+(NSIndexPath *)indexPath{
+    static NSString *cellIdentifier = @"cellID";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:
+                             cellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc]initWithStyle:
+                UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
+    }
+    NSString *stringForCell;
+    NSString *detailText;
+    //UILabel *addFriendButton = [[UILabel alloc] init];
+    
+    //addFriendButton.frame = CGRectMake(150.0f, 5.0f, 130.0f, 30.0f);
+    //[cell addSubview:addFriendButton];
+    if (indexPath.section == 0) {
+        stringForCell = @"Show outbox";
+    } else if (indexPath.section == 1){
+        stringForCell = [@"inbox message number" stringByAppendingString:[NSString stringWithFormat:@"%ld",(long)indexPath.row]];
+        detailText = @"This is inbox message";
+    }
+    
+    
+    [cell.textLabel setText:stringForCell];
+    if(indexPath.section != 0){
+        [cell.detailTextLabel setTextColor:[UIColor grayColor]];
+        [cell.detailTextLabel setText:detailText];
+    }
+    return cell;
+}
+
+
+
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:
+(NSInteger)section{
+    
+    return nil;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:
+(NSIndexPath *)indexPath{
+   
+}
 /*
 #pragma mark - Navigation
 
