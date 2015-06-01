@@ -43,6 +43,8 @@
         self.noTasksLabel.frame = CGRectMake(self.view.frame.size.width/2-80, 70.0f, 160.0f, 30.0f);
         [self.view addSubview:self.noTasksLabel];
     }
+    [self.noTasksLabel setHidden:NO];
+    [self.myTableView setHidden:YES];
 }
 
 

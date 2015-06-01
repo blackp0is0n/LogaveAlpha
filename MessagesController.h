@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Message.h"
 
 @interface MessagesController : UIViewController<UISearchBarDelegate,UITableViewDelegate>
 @property (strong, nonatomic) IBOutlet UIScrollView *myScrollView;
@@ -17,8 +18,7 @@
 @property (strong,nonatomic)NSMutableData *receivedData;
 @property(nonatomic,strong)NSString *userKey;
 @property(nonatomic,strong)NSMutableArray *inboxArray;
-@property(nonatomic,strong)NSMutableArray *outboxArray;
-@property(nonatomic,strong)UILabel *noTasksLabel;
+@property(nonatomic,strong)UILabel *noMessages;
 
 -(void)updateSections;
 -(void)createMessagesConnection:(NSString*)key;

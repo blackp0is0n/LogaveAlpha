@@ -30,7 +30,7 @@
     
     self.navigationItem.leftBarButtonItem = revealButtonItem;
     
-    UIBarButtonItem *newMessageButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:nil action:@selector(revealToggle:)];
+    UIBarButtonItem *newMessageButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:nil action:nil];
     self.navigationItem.rightBarButtonItem = newMessageButtonItem;
     _refreshControl = [[UIRefreshControl alloc]init];
     [self.myTableView addSubview:_refreshControl];
@@ -49,6 +49,16 @@
     
     [self createMessagesConnection:[self getUserKey]];
     //[self.view addSubview:self.noTasksLabel];
+    
+    if (self.noMessages == nil){
+        self.noMessages = [[UILabel alloc] init];
+        [self.noMessages setText:@"No tasks for this Day"];
+        [self.noMessages setTextColor:[UIColor grayColor]];
+        self.noMessages.frame = CGRectMake((float)(self.view.frame.size.width/2-80), 70.0f, 160.0f, 30.0f);
+        NSLog(@"Width is:%f",self.view.frame.size.width);
+        //[self.view addSubview:self.noMessages];
+    }
+    _inboxArray = [[NSMutableArray alloc] init];
 }
 
 -(void)setUserKey:(NSString *)userKey{
@@ -106,20 +116,19 @@
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:_receivedData options:NSJSONReadingMutableContainers error:nil];
     NSLog(@"%@",json);
-    /*if (_receivedData!=nil) {
+    if (_receivedData!=nil) {
         NSError *e = nil;
 
         NSLog(@"Key is:%@\nBurn MF",[self getUserKey]);
         NSString *answer = json[@"status_message"];
-        [_activeTasksArray removeAllObjects];
-        [_nonActiveTasksArray removeAllObjects];
+        [_inboxArray removeAllObjects];
         NSString *task = json[@"data"][@"task"];
         [self setUserKey:json[@"data"][@"key"]];
         
         if([answer isEqual:@"OK"]){
             [self setUserKey:json[@"data"][@"key"]];
             if (![task isEqual:@"No tasks"]) {
-                [self.noTasksLabel setHidden:YES];
+                [self.noMessages setHidden:YES];
                 [self.myTableView setHidden:NO];
                 for(int i = 0;i<[json[@"data"][@"task"] count];i++){
                     NSString *tID = json[@"data"][@"task"][i][@"id"];
@@ -132,7 +141,7 @@
                     NSString *address = json[@"data"][@"task"][i][@"address"];
                     NSString *taskDescription = json[@"data"][@"task"][i][@"description"];
                     NSString *taskDate = json[@"data"][@"task"][i][@"date"];
-                    Task *myTask = [[Task alloc] init];
+                    Message *myMessage = [[Message alloc] init];
                     myTask.taskID = tID;
                     myTask.managerID = mID;
                     myTask.taskDescription = taskDescription;
@@ -162,7 +171,7 @@
             }
             [self updateSections];
         }
-    }*/
+    }
     
 }
 
@@ -219,6 +228,7 @@
     //[cell addSubview:addFriendButton];
     if (indexPath.section == 0) {
         stringForCell = @"Show outbox";
+        
     } else if (indexPath.section == 1){
         stringForCell = [@"inbox message number" stringByAppendingString:[NSString stringWithFormat:@"%ld",(long)indexPath.row]];
         detailText = @"This is inbox message";
