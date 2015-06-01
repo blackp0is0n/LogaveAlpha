@@ -108,66 +108,47 @@
 }
 
 -(void) updateSections {
-    //NSRange range = NSMakeRange(0, [self numberOfSectionsInTableView:self.myTableView]);
-    ///NSIndexSet *sections = [NSIndexSet indexSetWithIndexesInRange:range];
-    //[self.myTableView reloadSections:sections withRowAnimation:UITableViewRowAnimationAutomatic];
+    NSRange range = NSMakeRange(0, [self numberOfSectionsInTableView:self.myTableView]);
+    NSIndexSet *sections = [NSIndexSet indexSetWithIndexesInRange:range];
+    [self.myTableView reloadSections:sections withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:_receivedData options:NSJSONReadingMutableContainers error:nil];
     NSLog(@"%@",json);
     if (_receivedData!=nil) {
-        NSError *e = nil;
 
         NSLog(@"Key is:%@\nBurn MF",[self getUserKey]);
         NSString *answer = json[@"status_message"];
         [_inboxArray removeAllObjects];
-        NSString *task = json[@"data"][@"task"];
+        NSString *messageName= json[@"data"][@"data"];
         [self setUserKey:json[@"data"][@"key"]];
         
         if([answer isEqual:@"OK"]){
             [self setUserKey:json[@"data"][@"key"]];
-            if (![task isEqual:@"No tasks"]) {
+            if (![messageName isEqual:@"No messages"]) {
                 [self.noMessages setHidden:YES];
                 [self.myTableView setHidden:NO];
-                for(int i = 0;i<[json[@"data"][@"task"] count];i++){
-                    NSString *tID = json[@"data"][@"task"][i][@"id"];
-                    NSString *mID = json[@"data"][@"task"][i][@"manager_id"];
-                    NSString *courID = json[@"data"][@"task"][i][@"courier_id"];
-                    NSString *getName = json[@"data"][@"task"][i][@"name"];
-                    NSString *getSName = json[@"data"][@"task"][i][@"sname"];
-                    NSString *getPhone = json[@"data"][@"task"][i][@"phone"];
-                    NSString *tIsActive = json[@"data"][@"task"][i][@"active"];
-                    NSString *address = json[@"data"][@"task"][i][@"address"];
-                    NSString *taskDescription = json[@"data"][@"task"][i][@"description"];
-                    NSString *taskDate = json[@"data"][@"task"][i][@"date"];
+                for(int i = 0;i<[json[@"data"][@"data"] count];i++){
+                    NSString *message = json[@"data"][@"data"][i][@"message"];
+                    NSString *topic = json[@"data"][@"data"][i][@"topic"];
+                    NSString *sname = json[@"data"][@"data"][i][@"sname"];
+                    NSString *ID = json[@"data"][@"data"][i][@"id"];
+                    NSString *name = json[@"data"][@"data"][i][@"name"];
+                    NSString *date = json[@"data"][@"data"][i][@"date"];
                     Message *myMessage = [[Message alloc] init];
-                    myTask.taskID = tID;
-                    myTask.managerID = mID;
-                    myTask.taskDescription = taskDescription;
-                    myTask.taskAddress = address;
-                    myTask.courierID = courID;
-                    myTask.name = getName;
-                    myTask.sname = getSName;
-                    myTask.phone = getPhone;
-                    myTask.key = [self getUserKey];
-                    if([tIsActive isEqualToString:@"1"]){
-                        myTask.taskIsActive = @"YES";
-                    } else {
-                        myTask.taskIsActive = @"NO";
-                    }
-                    myTask.date = taskDate;
-                    if ([myTask.taskIsActive isEqualToString:@"YES"]) {
-                        [_activeTasksArray addObject:myTask];
-                    } else {
-                        [_nonActiveTasksArray addObject:myTask];
-                    }
+                    myMessage.message = message;
+                    myMessage.topic = topic;
+                    myMessage.senderID = ID;
+                    myMessage.senderName = name;
+                    myMessage.senderSName = sname;
+                    myMessage.date = date;
+                    [_inboxArray addObject:myMessage];
                 }
             } else {
-                [_activeTasksArray removeAllObjects];
-                [_nonActiveTasksArray removeAllObjects];
+                [_inboxArray removeAllObjects];
                 [self.myTableView setHidden:YES];
-                [self.noTasksLabel setHidden:NO];
+                [self.noMessages setHidden:NO];
             }
             [self updateSections];
         }
@@ -201,13 +182,13 @@
     if (section == 0) {
         return 1;
     } else {
-        return 10;
+        return _inboxArray.count;
     }
 }
 
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 55;
+    return 75;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:
@@ -222,16 +203,15 @@
     }
     NSString *stringForCell;
     NSString *detailText;
-    //UILabel *addFriendButton = [[UILabel alloc] init];
-    
-    //addFriendButton.frame = CGRectMake(150.0f, 5.0f, 130.0f, 30.0f);
-    //[cell addSubview:addFriendButton];
+
     if (indexPath.section == 0) {
         stringForCell = @"Show outbox";
         
     } else if (indexPath.section == 1){
-        stringForCell = [@"inbox message number" stringByAppendingString:[NSString stringWithFormat:@"%ld",(long)indexPath.row]];
-        detailText = @"This is inbox message";
+        Message *message = [_inboxArray objectAtIndex:indexPath.row];
+        stringForCell = message.topic;
+        
+        detailText = [[message.senderSName stringByAppendingString:@" "] stringByAppendingString:message.senderName];
     }
     
     
@@ -247,14 +227,27 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:
 (NSInteger)section{
-    
-    return nil;
+    if(section == 0){
+        return @"Inbox";
+    }else {
+        return nil;
+    }
 }
+
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:
 (NSIndexPath *)indexPath{
-   
+    if (indexPath.section == 1) {
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        Message *myMesssage = [_inboxArray objectAtIndex:indexPath.row];
+        NSString *title = [[myMesssage.senderName stringByAppendingString:@" "] stringByAppendingString:myMesssage.senderSName];
+        UIAlertView *errorAlert = [[UIAlertView alloc]
+                                   initWithTitle:title message:myMesssage.message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [errorAlert show];
+    }
 }
+
+
 /*
 #pragma mark - Navigation
 

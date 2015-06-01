@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Message.h"
 
-@interface MessagesController : UIViewController<UISearchBarDelegate,UITableViewDelegate>
+@interface MessagesController : UIViewController<UITableViewDataSource,UISearchBarDelegate,UITableViewDelegate>
 @property (strong, nonatomic) IBOutlet UIScrollView *myScrollView;
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
 @property (strong,nonatomic)UIRefreshControl *refreshControl;
