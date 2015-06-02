@@ -159,8 +159,8 @@
 - (void) dismissKeyboard
 {
     // add self
-    [self.view removeGestureRecognizer:_tap];
     [self.searchBar resignFirstResponder];
+    [self.view removeGestureRecognizer:_tap];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -239,13 +239,15 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:
 (NSIndexPath *)indexPath{
     if (indexPath.section == 1) {
-        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
         Message *myMesssage = [_inboxArray objectAtIndex:indexPath.row];
         NSString *title = [[myMesssage.senderName stringByAppendingString:@" "] stringByAppendingString:myMesssage.senderSName];
         UIAlertView *errorAlert = [[UIAlertView alloc]
                                    initWithTitle:title message:myMesssage.message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [errorAlert show];
     }
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self.searchBar resignFirstResponder];
 }
 
 
