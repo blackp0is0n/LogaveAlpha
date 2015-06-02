@@ -19,6 +19,7 @@
 @property(nonatomic,strong)NSString *userKey;
 @property(nonatomic,strong)NSMutableArray *inboxArray;
 @property(nonatomic,strong)UILabel *noMessages;
+@property (nonatomic,strong)UITapGestureRecognizer *tap;
 
 -(void)updateSections;
 -(void)createMessagesConnection:(NSString*)key;

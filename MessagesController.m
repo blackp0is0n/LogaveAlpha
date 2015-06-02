@@ -37,11 +37,11 @@
     [_refreshControl addTarget:self action:@selector(refreshTable) forControlEvents:UIControlEventValueChanged];
     _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
     
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+    _tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self
                                    action:@selector(dismissKeyboard)];
     
-    [self.view addGestureRecognizer:tap];
+    [self.view addGestureRecognizer:_tap];
     _searchBar.delegate = self;
     _searchBar.placeholder = @"Find this motherfucker";
     
@@ -159,6 +159,7 @@
 - (void) dismissKeyboard
 {
     // add self
+    [self.view removeGestureRecognizer:_tap];
     [self.searchBar resignFirstResponder];
 }
 
